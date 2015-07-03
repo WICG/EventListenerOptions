@@ -148,6 +148,25 @@
         </dd>
       </dl>
     </section>
+    <section>
+      <h2>Extensions to the <code>Event</code> interface</h2>
+      <p><code>Event</code> is defined in [[!DOM4]].</p>
+      <pre class="idl">
+        partial interface Event {
+          static EventListenerOptions getSupportedListenerOptions();
+        };
+      </pre>
+      <dl dfn-for="Event">
+        <dt><dfn>getSupportedListenerOptions</dfn></dt>
+        <dd>
+          <p>Return an <a>EventListenerOptions</a> with all dictionary members present.
+          The values in the dictionary have no meaning.</p>
+          <p class="note">This API is necessary for feature detection of support
+          for <code>EventListenerOptions</code> and for any possible future options.
+          </p>
+        </dd>
+      </dl>
+    </section>
     <section class="informative">
       <h2>Examples</h2>
       <p>The following are examples that demonstrate how the APIs in this specification might
