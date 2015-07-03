@@ -123,8 +123,8 @@
       <p><code>EventTarget</code> is defined in [[!DOM4]].</p>
       <pre class="idl">
         partial interface EventTarget {
-          boolean addEventListener(DOMString type, EventListener? callback, EventListenerOptions options);
-          boolean removeEventListener(DOMString type, EventListener? callback, EventListenerOptions options);
+          void addEventListener(DOMString type, EventListener? callback, EventListenerOptions options);
+          void removeEventListener(DOMString type, EventListener? callback, EventListenerOptions options);
         };
       </pre>
       <dl dfn-for="EventTarget">
@@ -132,9 +132,11 @@
         <dd>
           <p>Append an event listener to the list as defined by [[!DOM4]]
           including the specified <code>options</code> unless a handler with the same
-          type and options already exists.</p>
-          <p class="note">Calling <code>addEventListener(type, handler, capture)</code> behaves exactly
-          the same as <code>addEventListener(type, handler, {capture: capture, mayCancel: true})</code>.</p>
+          type and options already exists.  Instead of a <b>capture</b> variable,
+          each <a href="http://www.w3.org/TR/dom/#concept-event-listener">event listener</a>
+          has an <b>options</b> variable which includes <b>capture</b> and <b>mayCancel</b> members.</p>
+          <p class="note">This means <code>addEventListener(type, handler, capture)</code> is
+          identical to <code>addEventListener(type, handler, {capture: capture, mayCancel: true})</code>.</p>
         </dd>
         <dt><dfn>removeEventListener</dfn></dt>
         <dd>
