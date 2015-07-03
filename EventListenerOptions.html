@@ -34,6 +34,14 @@
           }],
       };
     </script>
+    <style>
+      p {
+        margin-top: 0;
+      }
+      dt {
+        margin-top: 1em !important;
+      }
+    </style>
   </head>
   <body>
     <section id='abstract'>
@@ -101,6 +109,11 @@
             of handler behavior.  If a requireCancelable=false handler happens to
             invoke preventDefault, the behavior shouldn't depend on what other handlers
             happen to be installed for the event.
+          </p>
+          <p class="note">
+            User agents are encouraged to generate a console warning or other debugging
+            aid to help authors identify places where their code is calling preventDefault
+            on an uncancelable event.
           </p>
           <code>null</code> means the default for the event type - equivalent to
           <code>true</code> for all cancelable events, and <code>false</code> otherwise.        
