@@ -46,8 +46,8 @@
   <body>
     <section id='abstract'>
       <p>This document defines an extension to DOM events which allows authors to
-      specify their intention not to call preventDefault on events, enabling important
-      performance optimizations. 
+      specify their intention not to call <a href="http://www.w3.org/TR/dom/#dom-event-preventdefault"><code>preventDefault</code></a>
+      on events, enabling important performance optimizations.
       </p>
     </section>
 
@@ -69,13 +69,13 @@
       have a threaded scrolling feature to permit scrolling to run smoothly even
       when expensive JavaScript is running, but this optimization can be defeated by
       the need to wait for the results of any <code>touchstart</code> and <code>touchmove</code> ([[Touch-Events]]) handlers,
-      which may prevent the scroll entirely by calling <code>TouchEvent.preventDefault</code>.
+      which may prevent the scroll entirely by calling <a href="http://www.w3.org/TR/touch-events/#the-touchstart-event"><code>TouchEvent.preventDefault</code></a>.
       However, analysis indicates that the majority of touch event handlers on the web will
       never actually call <code>preventDefault</code>.  Many developers are surprised
       to learn that simply adding an empty touch handler to their document can
       have a significant negative impact on scroll performance.</p>
       <p>This proposal provides a way for authors to indicate at handler registration
-      time whether the handler requires the ability to call <code>preventDefault</code>
+      time whether the handler may call <code>preventDefault</code>
       on the event (i.e. whether it needs an event that is cancelable).  When no
       touch handlers at a particular point require a cancelable event, a user agent
       is free to start scrolling immediately without waiting for JavaScript.</p>
@@ -89,7 +89,7 @@
       <pre class="idl">
         dictionary EventListenerOptions {
           boolean capture = false;
-          boolean? requireCancelable = null;
+          boolean mayCancel = true;
         };
       </pre>
       <dl>
@@ -98,25 +98,23 @@
           Same as the <code>capture</code> argument to <code>addEventListener</code> in [[!DOM4]].
           </div>
         </dd>
-        <dt><dfn>requireCancelable</dfn></dt>
+        <dt><dfn>mayCancel</dfn></dt>
         <dd>
-          Whether the handler requires the ability to call <code>preventDefault</code> on the
-          event.  An event dispatched to a handler which was installed with <code>requireCancelable=false</code>
+          Indicates whether the handler might call <code>preventDefault</code> on the
+          event.  An event dispatched to a handler which was installed with <code>mayCancel=false</code>
           will have <code>cancelable=false</code> for the duration of the handler
-          (and so any calls to preventDefault will be ignored).
+          (and so any calls to <code>preventDefault</code> will be ignored).
           <p class="note">
             This property is necessary for reasonable composition
-            of handler behavior.  If a requireCancelable=false handler happens to
-            invoke preventDefault, the behavior shouldn't depend on what other handlers
+            of handler behavior.  If a <code>mayCancel=false</code> handler happens to
+            invoke <code>preventDefault</code>, the behavior shouldn't depend on what other handlers
             happen to be installed for the event.
           </p>
           <p class="note">
             User agents are encouraged to generate a console warning or other debugging
-            aid to help authors identify places where their code is calling preventDefault
+            aid to help authors identify places where their code is calling <code>preventDefault</code>
             on an uncancelable event.
           </p>
-          <code>null</code> means the default for the event type - equivalent to
-          <code>true</code> for all cancelable events, and <code>false</code> otherwise.        
         </dd>
       </dl>
     </section>
@@ -132,14 +130,11 @@
       <dl dfn-for="EventTarget">
         <dt><dfn>addEventListener</dfn></dt>
         <dd>
-          <p>If <code>options</code> contains <code>requiresCancelable=true</code> but
-           <code>type</code> represents an event which is never cancelable, then
-           throw a <code>NotSupportedError</code>.</p>
-          <p>Otherwise, append an event listener to the list as defined by [[!DOM4]]
+          <p>Append an event listener to the list as defined by [[!DOM4]]
           including the specified <code>options</code> unless a handler with the same
-          type and equivalent options already exists.</p>
+          type and options already exists.</p>
           <p class="note">Calling <code>addEventListener(type, handler, capture)</code> behaves exactly
-          the same as <code>addEventListener(type, handler, {capture: capture})</code>.</p>
+          the same as <code>addEventListener(type, handler, {capture: capture, mayCancel: true})</code>.</p>
         </dd>
         <dt><dfn>removeEventListener</dfn></dt>
         <dd>
@@ -159,12 +154,11 @@
       <dl dfn-for="Event">
         <dt><dfn>getSupportedListenerOptions</dfn></dt>
         <dd>
-          <p>Return an <a>EventListenerOptions</a> with all dictionary members present.
-          The values in the dictionary have no meaning.</p>
+          <p>Return an <a>EventListenerOptions</a> with all dictionary members present
+          with their default value.</p>
           <p class="note">This API is necessary for feature detection of support
           for <code>EventListenerOptions</code> generally, and for specific options
-          that may be added in the future.
-          </p>
+          that may be added in the future.</p>
         </dd>
       </dl>
     </section>
@@ -176,7 +170,20 @@
         var lastTouchTime;
         document.addEventListener('touchstart', function(e) {
           lastTouchTime = Date.now();
-        }, {requireCancelable: false});
+        }, {mayCancel: false});
+      </pre>
+      <p>
+        Accidentally passing an <code>EventListenerOptions</code>
+        as the 3rd argument to <code>addEventListener</code> in a user agent that
+        doesn't support it will silently coerce the value to <code>true</code>,
+        resulting in a capturing handler being installed.  Authors are encouraged
+        to rely on a polyfill for EventListenerOptions to avoid confusion here.
+        Alternately feature detection can be done manually as follows.</p>
+      <pre id="example_2" resource="#example_2" class="example" title="Use feature detection to opt-out of cancelability if supported.">
+        var options = useCapture;
+        if ('getSupportedListenerOptions' in Event && 'mayCancel' in Event.getSupportedListenerOptions())
+          options = {mayCancel: false, capture: useCapture};
+        document.addEventListener('touchstart', touchHandler, options);
       </pre>
     </section>
   </body>
