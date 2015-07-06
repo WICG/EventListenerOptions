@@ -35,11 +35,11 @@
       };
     </script>
     <style>
-      p {
+      .note-title + p {
         margin-top: 0;
       }
-      dt {
-        margin-top: 1em !important;
+      dl dt {
+        margin-top: 1em;
       }
     </style>
   </head>
@@ -100,15 +100,23 @@
         </dd>
         <dt><dfn>mayCancel</dfn></dt>
         <dd>
-          Indicates whether the handler might call <code>preventDefault</code> on the
-          event.  An event dispatched to a handler which was installed with <code>mayCancel=false</code>
-          will have <code>cancelable=false</code> for the duration of the handler
-          (and so any calls to <code>preventDefault</code> will be ignored).
+          Indicates whether the handler might call <a href="http://www.w3.org/TR/dom/#dom-event-preventdefault"><code>preventDefault</code></a>
+          on the event.  When all handlers for an event are installed with <code>mayCancel=false</code>
+          the user agent may make optimizations that depend on <code>preventDefault</code> not being
+          called for the event.  In particular, it may allow scrolling to start immediately without waiting
+          for the event to be processed by JavaScript.
+          <p>An event dispatched to a handler which was installed with <code>mayCancel=false</code>
+          will have <a href="http://www.w3.org/TR/dom/#dom-event-cancelable"><code>cancelable=false</code></a>
+          for the duration of the handler, and so any calls to <code>preventDefault</code> will be ignored.</p>
           <p class="note">
-            This property is necessary for reasonable composition
-            of handler behavior.  If a <code>mayCancel=false</code> handler happens to
-            invoke <code>preventDefault</code>, the behavior shouldn't depend on what other handlers
-            happen to be installed for the event.
+            This property is valuable for stable composition
+            of handler behavior.  It ensures that a <code>mayCancel=false</code> handler which
+            accidentally triggers code that invokes <code>preventDefault</code> behaves
+            consistently regardless of what other handlers happen to be installed for the event.
+            As a result, <code>mayCancel</code> can reliably be adopted incrementally.
+            One component being upgraded to leverage <code>mayCancel=false</code>
+            doesn't risk exposing bugs in other components not necessarily under control
+            of the same author.
           </p>
           <p class="note">
             User agents are encouraged to generate a console warning or other debugging
