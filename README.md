@@ -1,5 +1,5 @@
 # EventListenerOptions
-A [proposal](http://rbyers.github.io/EventListenerOptions/EventListenerOptions.html) to extend the DOM event pattern to allow authors to opt-in to uncancelable events.  Coming soon: a polyfill and conformance tests.
+A [proposal](http://rbyers.github.io/EventListenerOptions/EventListenerOptions.html) to extend the DOM event pattern to allow authors to opt-in to uncancelable events.  To be reworked into a pull-request on the DOM events specification.
 
 References:
  * One [discussion on public-pointer-events](https://lists.w3.org/Archives/Public/public-pointer-events/2015AprJun/0042.html)
