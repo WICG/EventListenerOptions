@@ -1,5 +1,6 @@
 # Passive event listeners
 
+TODO: This is a work-in-progress
 
 ## The problem
 
@@ -23,3 +24,7 @@ designed to never block scrolling, and so do not suffer from this issue.  Essent
 listener proposal brings the performance properties of pointer events to touch and wheel events.
 
 This proposal provides a way for authors to indicate at handler registration time whether the handler may call preventDefault on the event (i.e. whether it needs an event that is cancelable). When no touch handlers at a particular point require a cancelable event, a user agent is free to start scrolling immediately without waiting for JavaScript.
+
+## EventListenerOptions
+
+## The 'passive' option
