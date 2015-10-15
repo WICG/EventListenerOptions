@@ -38,7 +38,7 @@ First, we need a mechanism for attaching additional information to an event list
   document.addEventListener('touchstart', handler, {capture: true});
 ```
 
-Developers can do feature detection on specific options as follows:
+Developers / polyfills can do feature detection on specific options as follows:
 
 ```javascript
 var supportsCaptureOption = false;
@@ -68,16 +68,16 @@ The `passive` option is a promise that a listener will never call `preventDefaul
   }, {passive: true});
 ```
 
-Now rather than the browser having to block scrolling whenever there is any touch or wheel listener, it can do so only when there are *non-passive* listeners.  `passive` listeners become completely free of performance side-effects.
+Now rather than the browser having to block scrolling whenever there is any touch or wheel listener, it can do so only when there are *non-passive* listeners.  `passive` listeners are free of performance side-effects.
 
 ## Removing dependencies on cancelling touch events.
 
 Listeners can be simply updated to be `passive` in a number of common scenarios, eg:
  * User activity monitoring which just wants to know when the user was last active
  * `touchstart` handlers that hide some active UI (like tooltips)
- * `touchend` handlers that style/activate UI elements (without suppressing the `click` event).
+ * `touchstart` and `touchend` handlers that style UI elements (without suppressing the `click` event).
 
-And of course there are scenarios where there is no need to use a `passive` listener because the listener intentionally disables scrolling, eg:
+And of course there are scenarios where there is no need to use a `passive` listener because the listener intentionally disables scrolling in all cases, eg:
  * Panning a map
  * Games
 
