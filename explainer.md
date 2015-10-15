@@ -1,6 +1,6 @@
 # Passive event listeners
 
-Passive event listeners are a feature that would  enable developers to opt-in to better scroll performance. 
+Passive event listeners are a feature that would  enable developers to opt-in to better scroll performance by eliminating the need for scroling to block on touch and wheel event listeners.
 
 ## The problem
 
