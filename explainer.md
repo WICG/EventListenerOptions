@@ -70,7 +70,7 @@ The `passive` option is a promise that a listener will never call `preventDefaul
 
 Now rather than the browser having to block scrolling whenever there is any touch or wheel listener, it can do so only when there are *non-passive* listeners.  `passive` listeners are free of performance side-effects.
 
-## Removing dependencies on cancelling touch events.
+## Removing the need to cancel touch events
 
 Listeners can be simply updated to be `passive` in a number of common scenarios, eg:
  * User activity monitoring which just wants to know when the user was last active
