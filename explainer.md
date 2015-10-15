@@ -1,6 +1,6 @@
 # Passive event listeners
 
-Passive event listeners are a feature that would  enable developers to opt-in to better scroll performance by eliminating the need for scroling to block on touch and wheel event listeners.
+Passive event listeners are a feature that would enable developers to opt-in to better scroll performance by eliminating the need for scrolling to block on touch and wheel event listeners.
 
 ## The problem
 
@@ -8,7 +8,7 @@ Smooth scrolling performance is essential to a good experience on the web, espec
 Yet a substantial fraction of touch scrolls take longer than 100ms to begin on many websites on mobile browsers
 (and a catastrophic 500ms delay is not unusual during page load).
 
-Modern browsers all have a threaded scrolling feature to permit scrolling to run smoothly even when expensive
+All modern browsers have a threaded scrolling feature to permit scrolling to run smoothly even when expensive
 JavaScript is running, but this optimization is partially defeated by the need to wait for the results of
 any `touchstart` and `touchmove` handlers, which may prevent the scroll entirely by calling [`preventDefault()`](http://www.w3.org/TR/touch-events/#the-touchstart-event)
 on the event. However, analysis indicates that the majority of touch event handlers on the web never actually
@@ -32,7 +32,7 @@ First, we need a mechanism for attaching additional information to an event list
   document.addEventListener('touchstart', handler, true);
 ```
 
-`EventListenerOptions` let's us write this more clearly as:
+`EventListenerOptions` lets us write this more clearly as:
 
 ```javascript
   document.addEventListener('touchstart', handler, {capture: true});
@@ -82,8 +82,8 @@ And of course there are scenarios where there is no need to use a `passive` list
  * Games
 
 But there are a few more complicated scenarios where the handler really wants to suppress scrolling some cases but not in others.  eg:
- * Swiping horizontally to rotate a carousell, dismiss an item or reveal a drawer, while still permitting vertical scrolling.
-   * In this case, consider using `[touch-action](https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action)` to declaratively disable scrolling along one axis without having to call `preventDefault()'.
+ * Swiping horizontally to rotate a carousel, dismiss an item or reveal a drawer, while still permitting vertical scrolling.
+   * In this case, consider using [touch-action](https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action) to declaratively disable scrolling along one axis without having to call `preventDefault()`.
  * Event delegation patterns where the code that adds the listener won't know if the consumer will cancel the event.
    * Probably the only option here is to do delegation separately for passive and non-passive listeners (as if they were different event types entirely).
 
