@@ -10,9 +10,9 @@ Yet a substantial fraction of touch scrolls take longer than 100ms to begin on m
 
 Modern browsers all have a threaded scrolling feature to permit scrolling to run smoothly even when expensive
 JavaScript is running, but this optimization is partially defeated by the need to wait for the results of
-any `touchstart` and `touchmove` handlers, which may prevent the scroll entirely by calling [`preventDefault`](http://www.w3.org/TR/touch-events/#the-touchstart-event)
+any `touchstart` and `touchmove` handlers, which may prevent the scroll entirely by calling [`preventDefault()`](http://www.w3.org/TR/touch-events/#the-touchstart-event)
 on the event. However, analysis indicates that the majority of touch event handlers on the web never actually
-call preventDefault, so we're often blocking scrolling unneccesarily.
+call `preventDefault()`, so we're often blocking scrolling unneccesarily.
 
 Many developers are surprised to learn that [simply adding an empty touch handler to their document](http://rbyers.github.io/janky-touch-scroll.html) can have a
 significant negative impact on scroll performance.  Developers quite reasonably expect that the act of observing an event should not have any side-effects.
@@ -22,7 +22,7 @@ suffer from an identical issue. However [pointer event handlers](https://w3c.git
 designed to never block scrolling, and so do not suffer from this issue.  Essentially the passive event
 listener proposal brings the performance properties of pointer events to touch and wheel events.
 
-This proposal provides a way for authors to indicate at handler registration time whether the handler may call preventDefault on the event (i.e. whether it needs an event that is [cancelable](https://dom.spec.whatwg.org/#dom-event-cancelable)). When no touch handlers at a particular point require a cancelable event, a user agent is free to start scrolling immediately without waiting for JavaScript.
+This proposal provides a way for authors to indicate at handler registration time whether the handler may call `preventDefault()` on the event (i.e. whether it needs an event that is [cancelable](https://dom.spec.whatwg.org/#dom-event-cancelable)). When no touch handlers at a particular point require a cancelable event, a user agent is free to start scrolling immediately without waiting for JavaScript.
 
 ## EventListenerOptions
 
