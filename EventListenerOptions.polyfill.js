@@ -13,8 +13,6 @@
     }
   });
 
-  console.log("supports may cancel " + supportsMayCancel);
-
   if (!supportsMayCancel) {
     var super_add_event_listener = EventTarget.prototype.addEventListener;
     var super_remove_event_listener = EventTarget.prototype.removeEventListener;
