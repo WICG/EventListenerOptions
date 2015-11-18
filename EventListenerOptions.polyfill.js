@@ -40,17 +40,9 @@
       action(needsWrapping, fieldId, useCapture, passive);
     }
 
-    function wrapCancelableEvent(e) {
-      Object.defineProperty(e, "cancelable", {value: false, writable: false, configurable: true});
-    }
-
-    function unwrapCancelableEvent(e) {
-      delete e.cancelable;
-    }
-
     Event.prototype.preventDefault = function() {
-      if (!this.cancelable) {
-        console.warn("Trying to PreventDefault a non-cancelable event");
+      if (this.__passive) {
+        console.warn("Ignored attempt to preventDefault an event from a passive listener");
         return;
       }
       super_prevent_default.apply(this);
@@ -73,16 +65,13 @@
               return;
             var wrapped = {
               handleEvent: function (e) {
-                var wrap = passive && e.cancelable;
-                if (wrap)
-                  wrapCancelableEvent(e);
+                e.__passive = passive;
                 if (typeof(listener) === 'function') {
                   listener(e);
                 } else {
                   listener.handleEvent(e);
                 }
-                if (wrap)
-                  unwrapCancelableEvent(e);
+                e.__passive = false;
               }
             };
             this.__event_listeners_options[type][listener][fieldId] = wrapped;
