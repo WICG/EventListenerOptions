@@ -5,15 +5,15 @@
 // ==/ClosureCompiler==
 
 (function() {
-  var supportsMayCancel = false;
+  var supportsPasive = false;
   document.createElement("div").addEventListener("test", function() {}, {
-    get mayCancel() {
-      supportsMayCancel = true;
+    get passive() {
+      supportsPassive = true;
       return false;
     }
   });
 
-  if (!supportsMayCancel) {
+  if (!supportsPassive) {
     var super_add_event_listener = EventTarget.prototype.addEventListener;
     var super_remove_event_listener = EventTarget.prototype.removeEventListener;
     var super_prevent_default = Event.prototype.preventDefault;
@@ -21,23 +21,23 @@
     function parseOptions(type, listener, options, action) {
       var needsWrapping = true;
       var useCapture = false;
-      var mayCancel = true;
+      var passive = false;
       var fieldId;
       if (options) {
         if (typeof(options) === 'object') {
-          mayCancel = options.mayCancel ? options.mayCancel : false;
-          useCapture = options.useCapture ? options.useCapture : false;
+          passive = options.passive ? true : false;
+          useCapture = options.useCapture ? true : false;
         } else {
           useCapture = options;
         }
       }
-      if (!mayCancel)
+      if (passive)
         needsWrapping = true;
       if (needsWrapping) {
         fieldId = useCapture.toString();
-        fieldId += mayCancel.toString();
+        fieldId += passive.toString();
       }
-      action(needsWrapping, fieldId, useCapture, mayCancel);
+      action(needsWrapping, fieldId, useCapture, passive);
     }
 
     function wrapCancelableEvent(e) {
@@ -58,10 +58,10 @@
 
     EventTarget.prototype.addEventListener = function(type, listener, options) {
       parseOptions(type, listener, options,
-        function(needsWrapping, fieldId, useCapture, mayCancel) {
+        function(needsWrapping, fieldId, useCapture, passive) {
           if (needsWrapping) {
             var fieldId = useCapture.toString();
-            fieldId += mayCancel.toString();
+            fieldId += passive.toString();
 
             if (!this.__event_listeners_options)
               this.__event_listeners_options = {};
@@ -73,7 +73,7 @@
               return;
             var wrapped = {
               handleEvent: function (e) {
-                var wrap = !mayCancel && e.cancelable;
+                var wrap = passive && e.cancelable;
                 if (wrap)
                   wrapCancelableEvent(e);
                 if (typeof(listener) === 'function') {
@@ -95,7 +95,7 @@
 
     EventTarget.prototype.removeEventListener = function(type, listener, options) {
       parseOptions(type, listener, options,
-        function(needsWrapping, fieldId, useCapture, mayCancel) {
+        function(needsWrapping, fieldId, useCapture, passive) {
           if (needsWrapping &&
               this.__event_listeners_options &&
               this.__event_listeners_options[type] &&
