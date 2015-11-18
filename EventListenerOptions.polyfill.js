@@ -5,7 +5,7 @@
 // ==/ClosureCompiler==
 
 (function() {
-  var supportsPasive = false;
+  var supportsPassive = false;
   document.createElement("div").addEventListener("test", function() {}, {
     get passive() {
       supportsPassive = true;
