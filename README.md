@@ -1,5 +1,5 @@
 # Passive Event Listeners (EventListenerOptions)
-A [proposal](https://rawgit.com/RByers/dom/event-listener-options/dom.html#dictionary-eventlisteneroptions) to extend the DOM event pattern to allow authors to opt-in to uncancelable events, primarily to enable scroll performance optimizations.  See the [**explainer document**](https://github.com/RByers/EventListenerOptions/blob/gh-pages/explainer.md) for an overview.
+A [proposal](https://rawgit.com/RByers/dom/event-listener-options/dom.html#dictdef-eventlisteneroptions) to extend the DOM event pattern to allow authors to opt-in to uncancelable events, primarily to enable scroll performance optimizations.  See the [**explainer document**](https://github.com/RByers/EventListenerOptions/blob/gh-pages/explainer.md) for an overview.
 
 References:
  * [Pull-request on the DOM specification](https://github.com/whatwg/dom/pull/82)
