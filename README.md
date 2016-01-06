@@ -10,4 +10,5 @@ References:
  * Earlier [scroll-blocks-on proposal](https://docs.google.com/document/d/1aOQRw76C0enLBd0mCG_-IM6bso7DxXwvqTiRWgNdTn8/edit#heading=h.wi06xpj70hhd) and discussion
  * [Chromium feature status](https://www.chromestatus.com/features/5718574840676352)
  * [Chromium bug](https://code.google.com/p/chromium/issues/detail?id=489802)
+ * [WebKit bug](https://bugs.webkit.org/show_bug.cgi?id=149466)
  * [Old stand-alone proposal](https://rbyers.github.io/EventListenerOptions/EventListenerOptions.html)
