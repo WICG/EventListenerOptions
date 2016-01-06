@@ -1,5 +1,5 @@
 # Passive Event Listeners (EventListenerOptions)
-An [extention] to the DOM event pattern to allow authors to opt-in to uncancelable events, primarily to enable scroll performance optimizations.  See the [**explainer document**](https://github.com/RByers/EventListenerOptions/blob/gh-pages/explainer.md) for an overview.
+An [extention](https://dom.spec.whatwg.org/#dictdef-eventlisteneroptions) to the DOM event pattern to allow authors to opt-in to uncancelable events, primarily to enable scroll performance optimizations.  See the [**explainer document**](https://github.com/RByers/EventListenerOptions/blob/gh-pages/explainer.md) for an overview.
 
 References:
  * [Commit in the DOM specification](https://github.com/whatwg/dom/commit/253a21b8e78e37447c47983916a7cf39c4f6a3c5)
