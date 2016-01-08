@@ -12,7 +12,10 @@ An [extention](https://dom.spec.whatwg.org/#dictdef-eventlisteneroptions) to the
  * [WebKit bug](https://bugs.webkit.org/show_bug.cgi?id=149466)
 
 #### Issues with and adoption by key libraries:
+  * Optimizely [public discussion pending]
   * [Parse.ly](https://github.com/Parsely/time-engaged/issues/3)
+  * jQuery [public discussion pending]
+  * [Ember.js](https://github.com/emberjs/ember.js/issues/12783)
 
 #### History:
  * [Commit in the DOM specification](https://github.com/whatwg/dom/commit/253a21b8e78e37447c47983916a7cf39c4f6a3c5)
