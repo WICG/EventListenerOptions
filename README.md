@@ -8,8 +8,7 @@ Additional background on the problem:
 
 Status of implementations:
  * [Polyfill](https://rbyers.github.com/EventListenerOptions/EventListenerOptions.polyfill.js)
- * [Chromium feature status](https://www.chromestatus.com/features/5718574840676352)
- * [Chromium bug](https://code.google.com/p/chromium/issues/detail?id=489802)
+ * [Chromium feature status](https://www.chromestatus.com/features/5718574840676352) and [launch bug](https://code.google.com/p/chromium/issues/detail?id=489802)
  * [WebKit bug](https://bugs.webkit.org/show_bug.cgi?id=149466)
 
 Interest / adoption by key libraries:
