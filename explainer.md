@@ -15,14 +15,14 @@ on the event. However, analysis indicates that the majority of touch event handl
 call `preventDefault()`, so we're often blocking scrolling unneccesarily.
 
 Many developers are surprised to learn that [simply adding an empty touch handler to their document](http://rbyers.github.io/janky-touch-scroll.html) can have a
-significant negative impact on scroll performance.  Developers quite reasonably expect that the act of observing an event should not have any side-effects.
+significant negative impact on scroll performance.  Developers quite reasonably expect that the act of observing an event [should not have any side-effects](https://dom.spec.whatwg.org/#observing-event-listeners).
 
 The fundamental problem here is not limited to touch events. [`wheel` events](https://w3c.github.io/uievents/#events-wheelevents)
 suffer from an identical issue. However [pointer event handlers](https://w3c.github.io/pointerevents/) are
 designed to never block scrolling, and so do not suffer from this issue.  Essentially the passive event
 listener proposal brings the performance properties of pointer events to touch and wheel events.
 
-This proposal provides a way for authors to indicate at handler registration time whether the handler may call `preventDefault()` on the event (i.e. whether it needs an event that is [cancelable](https://dom.spec.whatwg.org/#dom-event-cancelable)). When no touch handlers at a particular point require a cancelable event, a user agent is free to start scrolling immediately without waiting for JavaScript.
+This proposal provides a way for authors to indicate at handler registration time whether the handler may call `preventDefault()` on the event (i.e. whether it needs an event that is [cancelable](https://dom.spec.whatwg.org/#dom-event-cancelable)). When no touch handlers at a particular point require a cancelable event, a user agent is free to start scrolling immediately without waiting for JavaScript.  That is, passive listeners are free from surprising performance side-effects.
 
 ## EventListenerOptions
 
@@ -32,7 +32,7 @@ First, we need a mechanism for attaching additional information to an event list
   document.addEventListener('touchstart', handler, true);
 ```
 
-`EventListenerOptions` lets us write this more clearly as:
+`[EventListenerOptions](https://dom.spec.whatwg.org/#dictdef-eventlisteneroptions)` lets us write this more clearly as:
 
 ```javascript
   document.addEventListener('touchstart', handler, {capture: true});
