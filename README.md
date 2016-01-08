@@ -11,7 +11,7 @@ An [extention](https://dom.spec.whatwg.org/#dictdef-eventlisteneroptions) to the
  * [Chromium feature status](https://www.chromestatus.com/features/5718574840676352) and [launch bug](https://code.google.com/p/chromium/issues/detail?id=489802)
  * [WebKit bug](https://bugs.webkit.org/show_bug.cgi?id=149466)
 
-#### Interest / adoption by key libraries:
+#### Issues with and adoption by key libraries:
   * [Parse.ly](https://github.com/Parsely/time-engaged/issues/3)
 
 #### History:
