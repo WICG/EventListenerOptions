@@ -90,3 +90,7 @@ But there are a few more complicated scenarios where the handler really wants to
 ## Measuring the benefit
 
 A big part of the reason that this issue hasn't already been addressed is that browsers lack good tooling for understanding the performance impact of this problem.  The Chrome team is working on a proposal for both a [PerformanceTimeline API](https://code.google.com/p/chromium/issues/detail?id=543598) and a [DevTools feature](https://code.google.com/p/chromium/issues/detail?id=520659) to help web developers get better visibility into this problem today.  Until then it's also posible to [monitor event timestamps](http://rbyers.net/scroll-latency.html) to measure scroll jank in the wild, and use [chromium's tracing system](https://www.chromium.org/developers/how-tos/trace-event-profiling-tool) to look at the InputLatency records for scrolling when debugging.
+
+## Further reading and discussion
+
+See the links [here](https://github.com/RByers/EventListenerOptions) for more details.  For questions or concerns, feel free to [file issues on this repo](https://github.com/RByers/EventListenerOptions/issues), or contact the chromium input team on [our public mailing list](https://groups.google.com/a/chromium.org/forum/#!forum/input-dev).
