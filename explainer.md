@@ -44,7 +44,7 @@ Developers / polyfills can do feature detection on specific options as follows:
 var supportsCaptureOption = false;
 document.createElement("div").addEventListener("test", function() {}, {
   get capture() {
-    supportsCapture = true;
+    supportsCaptureOption = true;
     return false;
   }
 });
