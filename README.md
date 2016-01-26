@@ -13,7 +13,7 @@ An [extention](https://dom.spec.whatwg.org/#dictdef-eventlisteneroptions) to the
 
 #### Issues with and adoption by key libraries:
   * [Parse.ly](https://github.com/Parsely/time-engaged/issues/3)
-  * jQuery [https://github.com/jquery/jquery/issues/2871]
+  * [jQuery](https://github.com/jquery/jquery/issues/2871)
   * Optimizely [private discussion]
   * [Ember.js](https://github.com/emberjs/ember.js/issues/12783)
 
