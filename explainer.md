@@ -32,13 +32,15 @@ First, we need a mechanism for attaching additional information to an event list
   document.addEventListener('touchstart', handler, true);
 ```
 
-`[EventListenerOptions](https://dom.spec.whatwg.org/#dictdef-eventlisteneroptions)` lets us write this more clearly as:
+[`EventListenerOptions`](https://dom.spec.whatwg.org/#dictdef-eventlisteneroptions) lets us write this more clearly as:
 
 ```javascript
   document.addEventListener('touchstart', handler, {capture: true});
 ```
 
-Developers / polyfills can do feature detection on specific options as follows:
+## Feature Detection
+
+Because older browsers will interpret any object in the 3rd argument as `useCapture=true` it's important for developers to use feature detection or [a polyfill](https://github.com/RByers/EventListenerOptions/blob/gh-pages/EventListenerOptions.polyfill.js) when using this API.  Feature detection for specific options can be done as follows:
 
 ```javascript
 var supportsCaptureOption = false;
