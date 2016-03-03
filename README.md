@@ -18,7 +18,7 @@ An [extention](https://dom.spec.whatwg.org/#dictdef-eventlisteneroptions) to the
   * [Ember.js](https://github.com/emberjs/ember.js/issues/12783)
 
 #### History:
- * [Commit in the DOM specification](https://github.com/whatwg/dom/commit/253a21b8e78e37447c47983916a7cf39c4f6a3c5)
+ * [Commit in the DOM specification](https://github.com/whatwg/dom/commit/253a21b8e78e37447c47983916a7cf39c4f6a3c5) and [pull request](https://github.com/whatwg/dom/pull/82)
  * [Outstanding issues](https://github.com/RByers/EventListenerOptions/issues?q=is%3Aissue)
  * [Discussion on WhatWG](https://lists.w3.org/Archives/Public/public-whatwg-archive/2015Jul/0018.html)
  * One [discussion on public-pointer-events](https://lists.w3.org/Archives/Public/public-pointer-events/2015AprJun/0042.html)
