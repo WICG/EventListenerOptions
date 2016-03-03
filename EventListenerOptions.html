@@ -26,9 +26,6 @@
                 }, {
                     value: 'File a bug / view open issues',
                     href: 'https://github.com/RByers/EventListenerOptions/issues'
-                }, {
-                    value: 'E-mail feedback',
-                    href: 'mailto:input-dev@chromium.org?subject=%5BEventListenerOptions%5D'
                 }
              ]
           }],
@@ -47,49 +44,24 @@
     <section id='abstract'>
       <p>This document defines an extension to DOM events which allows authors to
       specify their intention not to call <a href="http://www.w3.org/TR/dom/#dom-event-preventdefault"><code>preventDefault</code></a>
-      on events, enabling important performance optimizations.
+      on events, <a href="https://github.com/RByers/EventListenerOptions/blob/gh-pages/explainer.md">enabling important performance optimizations</a>.
       </p>
     </section>
 
     <section id='sotd'>
       <p>
         This proposal was produced in discussion with members of the W3C
-        <a href="http://www.w3.org/2012/pointerevents/">Pointer Events Working Group</a>.
-        It is my hope that the work here will ultimately be integrated into the [[DOM4]] specification.
+        <a href="http://www.w3.org/2012/pointerevents/">Pointer Events Working Group</a> and the WHATWG community.
+        It has now been <a href="https://dom.spec.whatwg.org/#dictdef-eventlisteneroptions">integrated into the WHATWG DOM specification</a>.
       </p>
     </section>
 
-    <section id="intro" class="informative">
-      <h2>Introduction</h2>
-      <p>Smooth scrolling performance is essential to a good experience on the web,
-      especially on touch-based devices.  Yet a substantial fraction of touch scrolls
-      take longer than 100ms to begin on many websites on mobile browsers (and a
-      catastrophic 500ms delay is not unusual during page load).</p>
-      <p>Modern browsers all
-      have a threaded scrolling feature to permit scrolling to run smoothly even
-      when expensive JavaScript is running, but this optimization can be defeated by
-      the need to wait for the results of any <code>touchstart</code> and <code>touchmove</code> ([[Touch-Events]]) handlers,
-      which may prevent the scroll entirely by calling <a href="http://www.w3.org/TR/touch-events/#the-touchstart-event"><code>TouchEvent.preventDefault</code></a>.
-      However, analysis indicates that the majority of touch event handlers on the web will
-      never actually call <code>preventDefault</code>.  Many developers are surprised
-      to learn that simply adding an empty touch handler to their document can
-      have a significant negative impact on scroll performance.</p>
-      <p>This proposal provides a way for authors to indicate at handler registration
-      time whether the handler may call <code>preventDefault</code>
-      on the event (i.e. whether it needs an event that is cancelable).  When no
-      touch handlers at a particular point require a cancelable event, a user agent
-      is free to start scrolling immediately without waiting for JavaScript.</p>
-      <p>The fundamental problem here is not limited to touch events.  <code>wheel</code>
-      events ([[UIEvents]]) suffer from an identical issue.  However pointer event
-      handlers ([[PointerEvents]]) never block scrolling, so this mechanism brings
-      the performance properties of pointer events to touch and wheel events.</p>
-    </section>
     <section dfn-for="EventListenerOptions">
       <h2>The <code>EventListenerOptions</code> dictionary</h2>
       <pre class="idl">
         dictionary EventListenerOptions {
           boolean capture = false;
-          boolean mayCancel = false;
+          boolean passive = false;
         };
       </pre>
       <dl>
@@ -101,27 +73,27 @@
         <dt><dfn>mayCancel</dfn></dt>
         <dd>
           Indicates whether the handler might call <a href="http://www.w3.org/TR/dom/#dom-event-preventdefault"><code>preventDefault</code></a>
-          on the event.  When all handlers for an event are installed with <code>mayCancel=false</code>
+          on the event.  When all handlers for an event are installed with <code>passive=true</code>
           the user agent may make optimizations that depend on <code>preventDefault</code> not being
           called for the event.  In particular, it may allow scrolling to start immediately without waiting
           for the event to be processed by JavaScript.
-          <p>An event dispatched to a handler which was installed with <code>mayCancel=false</code>
+          <p>An event dispatched to a handler which was installed with <code>passive=true</code>
           will have <a href="http://www.w3.org/TR/dom/#dom-event-cancelable"><code>cancelable=false</code></a>
           for the duration of the handler, and so any calls to <code>preventDefault</code> will be ignored.</p>
           <p class="note">
             This property is valuable for stable composition
-            of handler behavior.  It ensures that a <code>mayCancel=false</code> handler which
+            of handler behavior.  It ensures that a <code>passive=true</code> handler which
             accidentally triggers code that invokes <code>preventDefault</code> behaves
             consistently regardless of what other handlers happen to be installed for the event.
-            As a result, <code>mayCancel</code> can reliably be adopted incrementally.
-            One component being upgraded to leverage <code>mayCancel=false</code>
+            As a result, <code>passive</code> can reliably be adopted incrementally.
+            One component being upgraded to leverage <code>passive=true</code>
             doesn't risk exposing bugs in other components not necessarily under control
             of the same author.
           </p>
           <p class="note">
             User agents are encouraged to generate a console warning or other debugging
-            aid to help authors identify places where their code is calling <code>preventDefault</code>
-            on an uncancelable event.
+            aid to help authors identify places in their code where <code>preventDefault</code>
+            is being ignored.
           </p>
         </dd>
       </dl>
@@ -142,9 +114,9 @@
           including the specified <code>options</code> unless a handler with the same
           type and options already exists.  Instead of a <b>capture</b> variable,
           each <a href="http://www.w3.org/TR/dom/#concept-event-listener">event listener</a>
-          has an <b>options</b> variable which includes <b>capture</b> and <b>mayCancel</b> members.</p>
+          has an <b>options</b> variable which includes <b>capture</b> and <b>passive</b> members.</p>
           <p class="note">This means <code>addEventListener(type, handler, capture)</code> is
-          identical to <code>addEventListener(type, handler, {capture: capture, mayCancel: true})</code>.</p>
+          identical to <code>addEventListener(type, handler, {capture: capture})</code>.</p>
         </dd>
         <dt><dfn>removeEventListener</dfn></dt>
         <dd>
@@ -161,7 +133,7 @@
         var lastTouchTime;
         document.addEventListener('touchstart', function(e) {
           lastTouchTime = Date.now();
-        }, {mayCancel: false});
+        }, {passive: true});
       </pre>
       <p>
         Accidentally passing an <code>EventListenerOptions</code>
@@ -171,16 +143,16 @@
         to rely on a polyfill for EventListenerOptions to avoid confusion here.
         Alternately feature detection can be done manually as follows.</p>
       <pre id="example_2" resource="#example_2" class="example" title="Use feature detection to opt-out of cancelability when supported.">
-        var supportsMayCancel = false;
+        var supportsPassive = false;
         document.createElement("div").addEventListener("test", function() {}, {
-          get mayCancel() {
-            supportsMayCancel = true;
+          get passive() {
+            supportsPassive = true;
             return false;
           }
         });
         var options = useCapture;
-        if (supportsMayCancel)
-          options = {mayCancel: false, capture: useCapture};
+        if (supportsPassive)
+          options = {passive: true, capture: useCapture};
         document.addEventListener('touchstart', touchHandler, options);
       </pre>
     </section>
