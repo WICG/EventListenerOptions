@@ -40,7 +40,7 @@ First, we need a mechanism for attaching additional information to an event list
 
 ## Feature Detection
 
-Because older browsers will interpret any object in the 3rd argument as `useCapture=true` it's important for developers to use feature detection or [a polyfill](https://github.com/RByers/EventListenerOptions/blob/gh-pages/EventListenerOptions.polyfill.js) when using this API.  Feature detection for specific options can be done as follows:
+Because older browsers will interpret any object in the 3rd argument as `useCapture=true` it's important for developers to use feature detection or [a polyfill](https://github.com/WICG/EventListenerOptions/blob/gh-pages/EventListenerOptions.polyfill.js) when using this API.  Feature detection for specific options can be done as follows:
 
 ```javascript
 var supportsCaptureOption = false;
@@ -95,4 +95,4 @@ A big part of the reason that this issue hasn't already been addressed is that b
 
 ## Further reading and discussion
 
-See the links [here](https://github.com/RByers/EventListenerOptions) for more details.  For questions or concerns, feel free to [file issues on this repo](https://github.com/RByers/EventListenerOptions/issues), or contact the chromium input team on [our public mailing list](https://groups.google.com/a/chromium.org/forum/#!forum/input-dev).
+See the links [here](https://github.com/WICG/EventListenerOptions) for more details.  For questions or concerns, feel free to [file issues on this repo](https://github.com/WICG/EventListenerOptions/issues).
