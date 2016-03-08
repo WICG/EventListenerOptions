@@ -5,15 +5,15 @@ An [extention](https://dom.spec.whatwg.org/#dictdef-eventlisteneroptions) to the
  * See the main [commit in the DOM specification](https://github.com/whatwg/dom/commit/253a21b8e78e37447c47983916a7cf39c4f6a3c5) or [pull request](https://github.com/whatwg/dom/pull/82) for full details.
  * The key parts of the spec affected by this are [addEventListener](https://dom.spec.whatwg.org/#dom-eventtarget-addeventlistener), [Observing event listeners](https://dom.spec.whatwg.org/#observing-event-listeners), and [preventDefault](https://dom.spec.whatwg.org/#dom-event-preventdefault)
 
+#### Status of implementations:
+ * Chromium: In Chrome 50 behind chrome://flags/#enable-experimental-web-platform-features, expected to [ship](https://www.chromestatus.com/features/5718574840676352) in Chrome 51
+ * [Polyfill](https://rbyers.github.com/EventListenerOptions/EventListenerOptions.polyfill.js)
+ * [WebKit bug](https://bugs.webkit.org/show_bug.cgi?id=149466)
+
 #### Additional background on the problem:
  * [Ilya Grigorik's talk at Chrome Dev Summit](https://www.youtube.com/watch?v=NrEjkflqPxQ&feature=youtu.be&t=557) [[slides](https://docs.google.com/presentation/d/1WdMyLpuI93TR_w0fvKqFlUGPcLk3A4UJ2sBuUkeFcwU/present?slide=id.g7299ef155_0_7)]
  * Older [G+ post by Rick Byers](https://plus.google.com/+RickByers/posts/cmzrtyBYPQc)
  * [Demo page](http://rbyers.github.io/janky-touch-scroll.html)
-
-#### Status of implementations:
- * [Polyfill](https://rbyers.github.com/EventListenerOptions/EventListenerOptions.polyfill.js)
- * [Chromium feature status](https://www.chromestatus.com/features/5718574840676352) and [launch bug](https://code.google.com/p/chromium/issues/detail?id=489802)
- * [WebKit bug](https://bugs.webkit.org/show_bug.cgi?id=149466)
 
 #### Issues with and adoption by key libraries:
   * [Parse.ly](https://github.com/Parsely/time-engaged/issues/3)
