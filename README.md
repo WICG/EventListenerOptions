@@ -3,7 +3,7 @@ An [extention](https://dom.spec.whatwg.org/#dictdef-eventlisteneroptions) to the
 
 #### DOM Spec changes
  * See the main [commit in the DOM specification](https://github.com/whatwg/dom/commit/253a21b8e78e37447c47983916a7cf39c4f6a3c5) or [pull request](https://github.com/whatwg/dom/pull/82) for full details.
- * The key parts of the spec affected by this are [addEventListener](https://dom.spec.whatwg.org/#dom-eventtarget-addeventlistener), [Observing event listeners](https://dom.spec.whatwg.org/#observing-event-listeners), and [preventDefault](https://dom.spec.whatwg.org/#dom-event-preventdefault)
+ * The key parts of the spec affected by this are [EventTarget](https://dom.spec.whatwg.org/#eventtarget), [Observing event listeners](https://dom.spec.whatwg.org/#observing-event-listeners), and [preventDefault](https://dom.spec.whatwg.org/#dom-event-preventdefault)
 
 #### Status of implementations:
  * Chromium: In Chrome 50 behind chrome://flags/#enable-experimental-web-platform-features, expected to [ship](https://www.chromestatus.com/features/5745543795965952) in Chrome 51 ([launch bug](https://bugs.chromium.org/p/chromium/issues/detail?id=489802))
