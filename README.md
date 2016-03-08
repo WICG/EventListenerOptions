@@ -1,5 +1,5 @@
 # Passive Event Listeners (EventListenerOptions)
-An [extention](https://dom.spec.whatwg.org/#dictdef-eventlisteneroptions) to the DOM event pattern to allow listeners to disable support for `preventDefault`, primarily to enable scroll performance optimizations.  See the [**explainer document**](https://github.com/RByers/EventListenerOptions/blob/gh-pages/explainer.md) for an overview.
+An [extension](https://dom.spec.whatwg.org/#dictdef-eventlisteneroptions) to the DOM event pattern to allow listeners to disable support for `preventDefault`, primarily to enable scroll performance optimizations.  See the [**explainer document**](https://github.com/WICG/EventListenerOptions/blob/gh-pages/explainer.md) for an overview.
 
 #### DOM Spec changes
  * See the main [commit in the DOM specification](https://github.com/whatwg/dom/commit/253a21b8e78e37447c47983916a7cf39c4f6a3c5) or [pull request](https://github.com/whatwg/dom/pull/82) for full details.
@@ -7,7 +7,7 @@ An [extention](https://dom.spec.whatwg.org/#dictdef-eventlisteneroptions) to the
 
 #### Status of implementations:
  * Chromium: In Chrome 50 behind chrome://flags/#enable-experimental-web-platform-features, expected to [ship](https://www.chromestatus.com/features/5745543795965952) in Chrome 51 ([launch bug](https://bugs.chromium.org/p/chromium/issues/detail?id=489802))
- * [Polyfill](https://rbyers.github.com/EventListenerOptions/EventListenerOptions.polyfill.js)
+ * [Polyfill](https://WICG.github.com/EventListenerOptions/EventListenerOptions.polyfill.js)
  * [WebKit bug](https://bugs.webkit.org/show_bug.cgi?id=149466)
 
 #### Additional background on the problem:
@@ -21,7 +21,8 @@ An [extention](https://dom.spec.whatwg.org/#dictdef-eventlisteneroptions) to the
   * [Ember.js](https://github.com/emberjs/ember.js/issues/12783)
 
 #### History:
- * [Outstanding issues](https://github.com/RByers/EventListenerOptions/issues?q=is%3Aissue)
+ * [Outstanding issues](https://github.com/WICG/EventListenerOptions/issues?q=is%3Aissue)
+ * [WICG discussion](https://discourse.wicg.io/t/eventlisteneroptions-and-passive-event-listeners-move-to-wicg/1386/13)
  * [Discussion on WhatWG](https://lists.w3.org/Archives/Public/public-whatwg-archive/2015Jul/0018.html)
  * One [discussion on public-pointer-events](https://lists.w3.org/Archives/Public/public-pointer-events/2015AprJun/0042.html)
  * Earlier [scroll-blocks-on proposal](https://docs.google.com/document/d/1aOQRw76C0enLBd0mCG_-IM6bso7DxXwvqTiRWgNdTn8/edit#heading=h.wi06xpj70hhd) and discussion
