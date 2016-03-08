@@ -1,5 +1,5 @@
 # Passive Event Listeners (EventListenerOptions)
-An [extention](https://dom.spec.whatwg.org/#dictdef-eventlisteneroptions) to the DOM event pattern to allow authors to opt-in to uncancelable events, primarily to enable scroll performance optimizations.  See the [**explainer document**](https://github.com/RByers/EventListenerOptions/blob/gh-pages/explainer.md) for an overview.
+An [extention](https://dom.spec.whatwg.org/#dictdef-eventlisteneroptions) to the DOM event pattern to allow listeners to disable support for `preventDefault`, primarily to enable scroll performance optimizations.  See the [**explainer document**](https://github.com/RByers/EventListenerOptions/blob/gh-pages/explainer.md) for an overview.
 
 #### Additional background on the problem:
  * [Ilya Grigorik's talk at Chrome Dev Summit](https://www.youtube.com/watch?v=NrEjkflqPxQ&feature=youtu.be&t=557) [[slides](https://docs.google.com/presentation/d/1WdMyLpuI93TR_w0fvKqFlUGPcLk3A4UJ2sBuUkeFcwU/present?slide=id.g7299ef155_0_7)]
