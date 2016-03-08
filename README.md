@@ -6,7 +6,7 @@ An [extention](https://dom.spec.whatwg.org/#dictdef-eventlisteneroptions) to the
  * The key parts of the spec affected by this are [addEventListener](https://dom.spec.whatwg.org/#dom-eventtarget-addeventlistener), [Observing event listeners](https://dom.spec.whatwg.org/#observing-event-listeners), and [preventDefault](https://dom.spec.whatwg.org/#dom-event-preventdefault)
 
 #### Status of implementations:
- * Chromium: In Chrome 50 behind chrome://flags/#enable-experimental-web-platform-features, expected to [ship](https://www.chromestatus.com/features/5718574840676352) in Chrome 51
+ * Chromium: In Chrome 50 behind chrome://flags/#enable-experimental-web-platform-features, expected to [ship](https://www.chromestatus.com/features/5745543795965952) in Chrome 51 ([launch bug](https://bugs.chromium.org/p/chromium/issues/detail?id=489802))
  * [Polyfill](https://rbyers.github.com/EventListenerOptions/EventListenerOptions.polyfill.js)
  * [WebKit bug](https://bugs.webkit.org/show_bug.cgi?id=149466)
 
