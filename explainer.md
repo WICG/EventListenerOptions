@@ -44,12 +44,10 @@ Because older browsers will interpret any object in the 3rd argument as `useCapt
 
 ```javascript
 var supportsCaptureOption = false;
-document.createElement("div").addEventListener("test", function() {}, {
-  get capture() {
-    supportsCaptureOption = true;
-    return false;
-  }
-});
+try {
+  addEventListener("test", null, { get capture() { supportsCaptureOption = true; } });
+} catch(e) {}
+
 function myAddEventListener(target, type, handler, options) {
   var optionsOrCapture = options;
   if (!supportsCaptureOption)
