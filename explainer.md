@@ -47,7 +47,7 @@ var supportsCaptureOption = false;
 try {
   addEventListener("test", null, Object.defineProperty({}, 'capture', {get: function () {
     supportsCaptureOption = true;
-  }});
+  }}));
 } catch(e) {}
 
 function myAddEventListener(target, type, handler, options) {
