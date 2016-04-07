@@ -58,7 +58,7 @@ function myAddEventListener(target, type, handler, options) {
 
 ## The 'passive' option
 
-The `passive` option is a promise that a listener will never call `preventDefault()` on the event.  If it does, the user agent will just ignore the request (ideally generating at least a console warning), as it already does for events with `Event.cancelable=false`.  A developer can see this is the case by querying `Event.defaultPrevented` before and after calling `preventDefault()`.  Eg:
+The `passive` option declares up-front that the listener will never call `preventDefault()` on the event.  If it does, the user agent will just ignore the request (ideally generating at least a console warning), as it already does for events with `Event.cancelable=false`.  A developer can see this is the case by querying `Event.defaultPrevented` before and after calling `preventDefault()`.  Eg:
 
 ```javascript
   document.addEventListener("touchstart", function(e) {
