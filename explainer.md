@@ -68,7 +68,7 @@ The `passive` option declares up-front that the listener will never call `preven
   }, {passive: true});
 ```
 
-Now rather than the browser having to block scrolling whenever there is any touch or wheel listener, it can do so only when there are *non-passive* listeners.  `passive` listeners are free of performance side-effects.
+Now rather than the browser having to block scrolling whenever there is any touch or wheel listener, it can do so only when there are *non-passive* listeners (see [TouchEvents spec](http://w3c.github.io/touch-events/#cancelability)).  `passive` listeners are free of performance side-effects.
 
 ## Removing the need to cancel touch events
 
