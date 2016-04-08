@@ -1,6 +1,6 @@
 # Passive event listeners
 
-Passive event listeners are a new feature [in the DOM spec](https://dom.spec.whatwg.org/#dom-eventlisteneroptions-passive) that enable developers to opt-in to better scroll performance by eliminating the need for scrolling to block on touch and wheel event listeners.  This feature is available in Chrome 50 with chrome://flags/#enable-experimental-web-platform-features enabled, and is expected to [ship in Chrome 51](https://www.chromestatus.com/features/5745543795965952).
+Passive event listeners are a new feature [in the DOM spec](https://dom.spec.whatwg.org/#dom-eventlisteneroptions-passive) that enable developers to opt-in to better scroll performance by eliminating the need for scrolling to block on touch and wheel event listeners.  This feature is [shipping in Chrome 51](https://www.chromestatus.com/features/5745543795965952).
 
 ## The problem
 
