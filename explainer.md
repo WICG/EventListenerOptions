@@ -45,7 +45,9 @@ Because older browsers will interpret any object in the 3rd argument as `useCapt
 ```javascript
 var supportsCaptureOption = false;
 try {
-  addEventListener("test", null, { get capture() { supportsCaptureOption = true; } });
+  addEventListener("test", null, Object.defineProperty({}, 'capture', {get: function () {
+    supportsCaptureOption = true;
+  }}));
 } catch(e) {}
 
 function myAddEventListener(target, type, handler, options) {
