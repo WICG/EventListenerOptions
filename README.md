@@ -1,12 +1,13 @@
 # Passive Event Listeners (EventListenerOptions)
 An [extension](https://dom.spec.whatwg.org/#dictdef-eventlisteneroptions) to the DOM event pattern to allow listeners to disable support for `preventDefault`, primarily to enable scroll performance optimizations.  See the [**explainer document**](https://github.com/WICG/EventListenerOptions/blob/gh-pages/explainer.md) for an overview.
 
-#### DOM Spec changes
+#### Spec changes
  * See the main [commit in the DOM specification](https://github.com/whatwg/dom/commit/253a21b8e78e37447c47983916a7cf39c4f6a3c5) or [pull request](https://github.com/whatwg/dom/pull/82) for full details.
  * The key parts of the spec affected by this are [EventTarget](https://dom.spec.whatwg.org/#eventtarget), [Observing event listeners](https://dom.spec.whatwg.org/#observing-event-listeners), and [preventDefault](https://dom.spec.whatwg.org/#dom-event-preventdefault)
+ * Touch Events has [been updated](http://w3c.github.io/touch-events/#cancelability) to describe the performance optimization.
 
 #### Status of implementations:
- * Chromium: In Chrome 50 behind chrome://flags/#enable-experimental-web-platform-features, expected to [ship](https://www.chromestatus.com/features/5745543795965952) in Chrome 51 ([launch bug](https://bugs.chromium.org/p/chromium/issues/detail?id=489802))
+ * Chromium: [shipping](https://www.chromestatus.com/features/5745543795965952) in Chrome 51 ([launch bug](https://bugs.chromium.org/p/chromium/issues/detail?id=489802))
  * [Polyfill](https://WICG.github.com/EventListenerOptions/EventListenerOptions.polyfill.js)
  * [WebKit bug](https://bugs.webkit.org/show_bug.cgi?id=149466)
 
