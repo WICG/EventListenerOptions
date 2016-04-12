@@ -13,8 +13,10 @@ An [extension](https://dom.spec.whatwg.org/#dictdef-eventlisteneroptions) to the
 
 #### Additional background on the problem:
  * [Ilya Grigorik's talk at Chrome Dev Summit](https://www.youtube.com/watch?v=NrEjkflqPxQ&feature=youtu.be&t=557) [[slides](https://docs.google.com/presentation/d/1WdMyLpuI93TR_w0fvKqFlUGPcLk3A4UJ2sBuUkeFcwU/present?slide=id.g7299ef155_0_7)]
- * Older [G+ post by Rick Byers](https://plus.google.com/+RickByers/posts/cmzrtyBYPQc)
+ * [Discussion on twitter](https://twitter.com/RickByers/status/719736672523407360) with [demo video](https://www.youtube.com/watch?v=NPM6172J22g)
  * [Demo page with latency measurement](https://rbyers.github.io/scroll-latency.html)
+ * [Chrome bug](https://bugs.chromium.org/p/chromium/issues/detail?id=599609) tracking the plan to "[intervene](bit.ly/user-agent-intervention)" and force touch listeners to be passive in scenarios where the compat risk is low but the perf benefit large.
+ * Older [G+ post by Rick Byers](https://plus.google.com/+RickByers/posts/cmzrtyBYPQc)
 
 #### Issues with and adoption by key libraries:
   * [Parse.ly](https://github.com/Parsely/time-engaged/issues/3)
