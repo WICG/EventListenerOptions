@@ -74,7 +74,7 @@ Now rather than the browser having to block scrolling whenever there is any touc
 
 ## Removing the need to cancel touch events
 
-In general touch listeners should always be `passive` unless you know they may need to block scrolling.  In a number of common scenarios the `passive` option can be added (with appropriate feature detection) without any other changes, eg:
+In general touch listeners should always be `passive` unless you know they need to block scrolling.  In a number of common scenarios the `passive` option can be added (with appropriate feature detection) without any other changes, eg:
  * User activity monitoring which just wants to know when the user was last active
  * `touchstart` handlers that hide some active UI (like tooltips)
  * `touchstart` and `touchend` handlers that style UI elements (without suppressing the `click` event).
@@ -85,9 +85,11 @@ And of course there are scenarios where there is no need to use a `passive` list
 
 But there are a few more complicated scenarios where the handler really wants to suppress scrolling some cases but not in others.  eg:
  * Swiping horizontally to rotate a carousel, dismiss an item or reveal a drawer, while still permitting vertical scrolling.
-   * In this case, consider using [touch-action](https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action) to declaratively disable scrolling along one axis without having to call `preventDefault()`.
+   * In this case, use [touch-action](https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action) to declaratively disable scrolling along one axis without having to call `preventDefault()`.
+   * To continue to work correctly in all browsers, calls to `preventDefault` should be conditional on the lack of support for the particular `touch-action` rule being used (note that Safari 9 supports `touch-action: manipulation` but not the other values).
  * Event delegation patterns where the code that adds the listener won't know if the consumer will cancel the event.
-   * Probably the only option here is to do delegation separately for passive and non-passive listeners (as if they were different event types entirely).
+   * One option here is to do delegation separately for passive and non-passive listeners (as if they were different event types entirely).
+   * It's also possible to leverage `touch-action` as you would above (treating Touch Events as you would [Pointer Events](https://w3c.github.io/pointerevents/).
 
 ## Measuring the perceived benefit
 
