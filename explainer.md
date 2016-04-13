@@ -74,14 +74,14 @@ Now rather than the browser having to block scrolling whenever there is any touc
 
 ## Removing the need to cancel touch events
 
-Listeners can be simply updated to be `passive` in a number of common scenarios, eg:
+In general touch listeners should always be `passive` unless you know they may need to block scrolling.  In a number of common scenarios the `passive` option can be added (with appropriate feature detection) without any other changes, eg:
  * User activity monitoring which just wants to know when the user was last active
  * `touchstart` handlers that hide some active UI (like tooltips)
  * `touchstart` and `touchend` handlers that style UI elements (without suppressing the `click` event).
 
 And of course there are scenarios where there is no need to use a `passive` listener because the listener intentionally disables scrolling in all cases, eg:
  * Panning a map
- * Games
+ * Full-page games
 
 But there are a few more complicated scenarios where the handler really wants to suppress scrolling some cases but not in others.  eg:
  * Swiping horizontally to rotate a carousel, dismiss an item or reveal a drawer, while still permitting vertical scrolling.
