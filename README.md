@@ -8,7 +8,7 @@ An [extension](https://dom.spec.whatwg.org/#dictdef-eventlisteneroptions) to the
 
 #### Status of implementations:
  * Chromium: [shipping](https://www.chromestatus.com/features/5745543795965952) in Chrome 51 ([launch bug](https://bugs.chromium.org/p/chromium/issues/detail?id=489802))
- * [Polyfill](https://WICG.github.com/EventListenerOptions/EventListenerOptions.polyfill.js)
+ * [Polyfill](EventListenerOptions.polyfill.js)
  * [WebKit bug](https://bugs.webkit.org/show_bug.cgi?id=149466)
 
 #### Additional background on the problem:
