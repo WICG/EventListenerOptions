@@ -50,7 +50,7 @@ try {
   }}));
 } catch(e) {}
 
-function myAddEventListener(target, type, handler, options) {
+function addEventListenerWithOptions(target, type, handler, options) {
   var optionsOrCapture = options;
   if (!supportsCaptureOption)
     optionsOrCapture = options.capture;
@@ -63,7 +63,7 @@ function myAddEventListener(target, type, handler, options) {
 The `passive` option declares up-front that the listener will never call `preventDefault()` on the event.  If it does, the user agent will just ignore the request (ideally generating at least a console warning), as it already does for events with `Event.cancelable=false`.  A developer can see this is the case by querying `Event.defaultPrevented` before and after calling `preventDefault()`.  Eg:
 
 ```javascript
-  document.addEventListener("touchstart", function(e) {
+  addEventListenerWithOptions(document, "touchstart", function(e) {
     console.log(e.defaultPrevented);  // will be false
     e.preventDefault();   // does nothing since the listener is passive
     console.log(e.defaultPrevented);  // still false
@@ -89,9 +89,13 @@ But there are a few more complicated scenarios where the handler really wants to
  * Event delegation patterns where the code that adds the listener won't know if the consumer will cancel the event.
    * Probably the only option here is to do delegation separately for passive and non-passive listeners (as if they were different event types entirely).
 
-## Measuring the benefit
+## Measuring the perceived benefit
 
 A big part of the reason that this issue hasn't already been addressed is that browsers lack good tooling for understanding the performance impact of this problem.  The Chrome team is working on a proposal for both a [PerformanceTimeline API](https://code.google.com/p/chromium/issues/detail?id=543598) and a [DevTools feature](https://code.google.com/p/chromium/issues/detail?id=520659) to help web developers get better visibility into this problem today.  Until then it's also posible to [monitor event timestamps](http://rbyers.net/scroll-latency.html) to measure scroll jank in the wild, and use [chromium's tracing system](https://www.chromium.org/developers/how-tos/trace-event-profiling-tool) to look at the InputLatency records for scrolling when debugging.
+
+## Reducing and breaking up long-running JS is still critical
+
+When a page exhibits substantial scroll jank, it's always an indication of an underlying peformance issue somewhere.  Passive event listeners do nothing to address that underlying issue, we still strongly encourage developers to ensure their application meets the [RAIL guidlines](https://developers.google.com/web/tools/chrome-devtools/profile/evaluate-performance/rail?hl=en) on even low-end phones.  If your site has logic that runs for >100ms at a time, it will still feel sluggish in response to taps / clicks.  Passive event listeners just allow developers to decouple the issue of having JS responsiveness reflected in scroll performance from the desire to monitor input events.  In particular, developers of third-party analytics libraries can now have some confidence that their use of light-weight event listeners will not fundamentally change the observed performance characteristics of any page using their code.
 
 ## Further reading and discussion
 
