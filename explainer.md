@@ -89,7 +89,7 @@ But there are a few more complicated scenarios where the handler really wants to
    * To continue to work correctly in all browsers, calls to `preventDefault` should be conditional on the lack of support for the particular `touch-action` rule being used (note that Safari 9 supports `touch-action: manipulation` but not the other values).
  * Event delegation patterns where the code that adds the listener won't know if the consumer will cancel the event.
    * One option here is to do delegation separately for passive and non-passive listeners (as if they were different event types entirely).
-   * It's also possible to leverage `touch-action` as you would above (treating Touch Events as you would [Pointer Events](https://w3c.github.io/pointerevents/).
+   * It's also possible to leverage `touch-action` as above (treating Touch Events as you would [Pointer Events](https://w3c.github.io/pointerevents/).
 
 ## Measuring the perceived benefit
 
