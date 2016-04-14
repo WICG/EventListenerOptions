@@ -5,8 +5,7 @@ Passive event listeners are a new feature [in the DOM spec](https://dom.spec.wha
 ## The problem
 
 Smooth scrolling performance is essential to a good experience on the web, especially on touch-based devices.
-Yet around 5% of touch scrolls take longer than 100ms to begin on Chrome for Android
-(and a catastrophic 500ms delay is not unusual during page load).
+Yet in Chrome for Android we see that 80% of the touch events that block scrolling never actually prevent it.  10% of these events add more than 100ms of delay to the start of scrolling, and a catastrophic delay of at least 500ms occurs in 1% of scrolls.
 
 All modern browsers have a threaded scrolling feature to permit scrolling to run smoothly even when expensive
 JavaScript is running, but this optimization is partially defeated by the need to wait for the results of
