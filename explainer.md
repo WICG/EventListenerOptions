@@ -100,4 +100,4 @@ When a page exhibits substantial scroll jank, it's always an indication of an un
 
 ## Further reading and discussion
 
-See the links [here](https://github.com/WICG/EventListenerOptions) for more details.  For questions or concerns, feel free to [file issues on this repo](https://github.com/WICG/EventListenerOptions/issues).
+See the links [here](https://github.com/WICG/EventListenerOptions) for more details.  For questions or concerns, feel free to [file issues on this repo](https://github.com/WICG/EventListenerOptions/issues), or reach out to [@RickByers](https://twitter.com/RickByers/).
