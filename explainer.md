@@ -54,7 +54,7 @@ try {
 
 function addEventListenerWithOptions(target, type, handler, options) {
   var optionsOrCapture = options;
-  if (!supportsCaptureOption){
+  if (!supportsCaptureOption) {
     optionsOrCapture = options.capture;
   }
   target.addEventListener(type, handler, optionsOrCapture);
