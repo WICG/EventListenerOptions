@@ -10,6 +10,7 @@ An [extension](https://dom.spec.whatwg.org/#dictdef-eventlisteneroptions) to the
  * Chromium: [shipping](https://www.chromestatus.com/features/5745543795965952) in Chrome 51 ([launch bug](https://bugs.chromium.org/p/chromium/issues/detail?id=489802))
  * [Polyfill](EventListenerOptions.polyfill.js)
  * [WebKit bug](https://bugs.webkit.org/show_bug.cgi?id=149466)
+ * [Firefox bug](https://bugzilla.mozilla.org/show_bug.cgi?id=1266066)
 
 #### Additional background on the problem:
  * [Ilya Grigorik's talk at Chrome Dev Summit](https://www.youtube.com/watch?v=NrEjkflqPxQ&feature=youtu.be&t=557) [[slides](https://docs.google.com/presentation/d/1WdMyLpuI93TR_w0fvKqFlUGPcLk3A4UJ2sBuUkeFcwU/present?slide=id.g7299ef155_0_7)]
