@@ -94,9 +94,11 @@ But there are a few more complicated scenarios where the handler really wants to
    * One option here is to do delegation separately for passive and non-passive listeners (as if they were different event types entirely).
    * It's also possible to leverage `touch-action` as above (treating Touch Events as you would [Pointer Events](https://w3c.github.io/pointerevents/).
 
-## Measuring the perceived benefit
+## Debugging and measuring the benefit
 
-A big part of the reason that this issue hasn't already been addressed is that browsers lack good tooling for understanding the performance impact of this problem.  The Chrome team is working on a proposal for both a [PerformanceTimeline API](https://code.google.com/p/chromium/issues/detail?id=543598) and a [DevTools feature](https://code.google.com/p/chromium/issues/detail?id=520659) to help web developers get better visibility into this problem today.  Until then it's also posible to [monitor event timestamps](http://rbyers.net/scroll-latency.html) to measure scroll jank in the wild, and use [chromium's tracing system](https://www.chromium.org/developers/how-tos/trace-event-profiling-tool) to look at the InputLatency records for scrolling when debugging.
+See [this video](https://www.youtube.com/watch?v=6-D_3yx_KVI) for tips on how to use Chrome dev-tools features to identify listeners that are blocking scrolling.  You can [monitor event timestamps](http://rbyers.net/scroll-latency.html) to measure scroll jank in the wild, and use [chromium's tracing system](https://www.chromium.org/developers/how-tos/trace-event-profiling-tool) to look at the InputLatency records for scrolling when debugging.
+
+The Chrome team is working on a proposal for both a [PerformanceTimeline API](https://code.google.com/p/chromium/issues/detail?id=543598) and more [DevTools features](https://code.google.com/p/chromium/issues/detail?id=520659) to help web developers get better visibility into this problem today.  
 
 ## Reducing and breaking up long-running JS is still critical
 
