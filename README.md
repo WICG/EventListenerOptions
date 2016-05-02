@@ -9,6 +9,7 @@ An [extension](https://dom.spec.whatwg.org/#dictdef-eventlisteneroptions) to the
 
 #### Status of implementations:
  * Chromium: [shipping](https://www.chromestatus.com/features/5745543795965952) in Chrome 51 ([launch bug](https://bugs.chromium.org/p/chromium/issues/detail?id=489802))
+   * [Chromium bug](https://bugs.chromium.org/p/chromium/issues/detail?id=599609) tracking the [next step](https://github.com/WICG/interventions/issues/18) of automatically opting some listeners into passive behavior.
  * [Polyfill](EventListenerOptions.polyfill.js)
  * [WebKit bug](https://bugs.webkit.org/show_bug.cgi?id=149466)
  * [Firefox bug](https://bugzilla.mozilla.org/show_bug.cgi?id=1266066)
