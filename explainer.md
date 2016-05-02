@@ -31,11 +31,13 @@ First, we need a mechanism for attaching additional information to an event list
   document.addEventListener('touchstart', handler, true);
 ```
 
-[`EventListenerOptions`](https://dom.spec.whatwg.org/#dictdef-eventlisteneroptions) lets us write this more clearly as:
+[`EventListenerOptions`](https://dom.spec.whatwg.org/#dictdef-eventlisteneroptions) lets us write this more explicitly as:
 
 ```javascript
   document.addEventListener('touchstart', handler, {capture: true});
 ```
+
+This much is simply new (extensible) syntax for existing behavior - specifying [whether you want the listener invoked during the capture phase or bubbling phase](http://javascript.info/tutorial/bubbling-and-capturing#capturing).
 
 ## Feature Detection
 
@@ -63,7 +65,7 @@ function addEventListenerWithOptions(target, type, handler, options) {
 
 ## The 'passive' option
 
-The `passive` option declares up-front that the listener will never call `preventDefault()` on the event.  If it does, the user agent will just ignore the request (ideally generating at least a console warning), as it already does for events with `Event.cancelable=false`.  A developer can see this is the case by querying `Event.defaultPrevented` before and after calling `preventDefault()`.  Eg:
+So now we have an extensible syntax for specifying options at event handler registration time.  We can now add a new `passive` option which declares up-front that the listener will never call `preventDefault()` on the event.  If it does, the user agent will just ignore the request (ideally generating at least a console warning), as it already does for events with `Event.cancelable=false`.  A developer can see this is the case by querying `Event.defaultPrevented` before and after calling `preventDefault()`.  Eg:
 
 ```javascript
   addEventListenerWithOptions(document, "touchstart", function(e) {
@@ -74,6 +76,8 @@ The `passive` option declares up-front that the listener will never call `preven
 ```
 
 Now rather than the browser having to block scrolling whenever there is any touch or wheel listener, it can do so only when there are *non-passive* listeners (see [TouchEvents spec](http://w3c.github.io/touch-events/#cancelability)).  `passive` listeners are free of performance side-effects.
+
+So **by marking a touch or wheel listener as `passive`, the developer is promising the handler won't call `preventDefault` to disable scrolling.**  This frees the browser up to respond to scrolling immediately without waiting for JavaScript, thus ensuring a reliably smooth scrolling experience for the user.
 
 ## Removing the need to cancel touch events
 
