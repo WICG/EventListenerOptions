@@ -19,6 +19,9 @@ An [extension](https://dom.spec.whatwg.org/#dictdef-eventlisteneroptions) to the
  * [Chrome bug](https://bugs.chromium.org/p/chromium/issues/detail?id=599609) tracking the plan to "[intervene](bit.ly/user-agent-intervention)" and force touch listeners to be passive in scenarios where the compat risk is low but the perf benefit large.
  * Older [G+ post by Rick Byers](https://plus.google.com/+RickByers/posts/cmzrtyBYPQc)
 
+#### Additional resources for understaning and using passive listeners
+  * [Tips for debugging scroll jank screencast](https://www.youtube.com/watch?v=6-D_3yx_KVI)
+
 #### Issues with and adoption by key libraries:
   * [Parse.ly](https://github.com/Parsely/time-engaged/issues/3)
   * [jQuery](https://github.com/jquery/jquery/issues/2871)
