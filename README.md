@@ -5,7 +5,7 @@ An [extension](https://dom.spec.whatwg.org/#dictdef-eventlisteneroptions) to the
  * See the main [commit in the DOM specification](https://github.com/whatwg/dom/commit/253a21b8e78e37447c47983916a7cf39c4f6a3c5) or [pull request](https://github.com/whatwg/dom/pull/82) for full details.
  * The key parts of the spec affected by this are [EventTarget](https://dom.spec.whatwg.org/#eventtarget), [Observing event listeners](https://dom.spec.whatwg.org/#observing-event-listeners), and [preventDefault](https://dom.spec.whatwg.org/#dom-event-preventdefault)
  * Touch Events has [been updated](http://w3c.github.io/touch-events/#cancelability) to describe the performance optimization.
- * WICG/interventions#18 tracks the plan to "[intervene](bit.ly/user-agent-intervention)" and force touch listeners to be passive in scenarios where the compat risk is low but the perf benefit large.
+ * [Interventions issue 18](https://github.com/WICG/interventions/issues/18) tracks the plan to "[intervene](bit.ly/user-agent-intervention)" and force touch listeners to be passive in scenarios where the compat risk is low but the perf benefit large.
 
 #### Status of implementations:
  * Chromium: [shipping](https://www.chromestatus.com/features/5745543795965952) in Chrome 51 ([launch bug](https://bugs.chromium.org/p/chromium/issues/detail?id=489802))
