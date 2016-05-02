@@ -1,6 +1,6 @@
 # Passive event listeners
 
-Passive event listeners are a new feature [in the DOM spec](https://dom.spec.whatwg.org/#dom-eventlisteneroptions-passive) that enable developers to opt-in to better scroll performance by eliminating the need for scrolling to block on touch and wheel event listeners.  This feature is [shipping in Chrome 51](https://www.chromestatus.com/features/5745543795965952) ([demo video](https://www.youtube.com/watch?v=NPM6172J22g)).
+Passive event listeners are a new feature [in the DOM spec](https://dom.spec.whatwg.org/#dom-eventlisteneroptions-passive) that enable developers to opt-in to better scroll performance by eliminating the need for scrolling to block on touch and wheel event listeners.  Developers can annotate touch and wheel listeners with `{passive: true}` to indicate that they will never invoke `preventDefault`.  This feature is [shipping in Chrome 51](https://www.chromestatus.com/features/5745543795965952) ([demo video](https://www.youtube.com/watch?v=NPM6172J22g)).
 
 ## The problem
 
@@ -51,7 +51,7 @@ try {
       supportsCaptureOption = true;
     }
   });
-  window.addEventListener("test", null, ops);
+  window.addEventListener("test", null, opts);
 } catch (e) {}
 
 function addEventListenerWithOptions(target, type, handler, options) {
@@ -63,7 +63,7 @@ function addEventListenerWithOptions(target, type, handler, options) {
 }
 ```
 
-## The 'passive' option
+## SOLUTION: the 'passive' option
 
 So now we have an extensible syntax for specifying options at event handler registration time.  We can now add a new `passive` option which declares up-front that the listener will never call `preventDefault()` on the event.  If it does, the user agent will just ignore the request (ideally generating at least a console warning), as it already does for events with `Event.cancelable=false`.  A developer can see this is the case by querying `Event.defaultPrevented` before and after calling `preventDefault()`.  Eg:
 
