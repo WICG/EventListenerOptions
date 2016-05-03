@@ -5,20 +5,17 @@ Passive event listeners are a new feature [in the DOM spec](https://dom.spec.wha
 ## The problem
 
 Smooth scrolling performance is essential to a good experience on the web, especially on touch-based devices.
-Yet in Chrome for Android we see that 80% of the touch events that block scrolling never actually prevent it.  10% of these events add more than 100ms of delay to the start of scrolling, and a catastrophic delay of at least 500ms occurs in 1% of scrolls.
-
 All modern browsers have a threaded scrolling feature to permit scrolling to run smoothly even when expensive
 JavaScript is running, but this optimization is partially defeated by the need to wait for the results of
-any `touchstart` and `touchmove` handlers, which may prevent the scroll entirely by calling [`preventDefault()`](http://www.w3.org/TR/touch-events/#the-touchstart-event)
-on the event. However, analysis indicates that the majority of touch event handlers on the web never actually
-call `preventDefault()`, so we're often blocking scrolling unneccesarily.
+any `touchstart` and `touchmove` handlers, which may prevent the scroll entirely by calling [`preventDefault()`](http://www.w3.org/TR/touch-events/#the-touchstart-event) on the event. However, analysis indicates that the majority of touch event handlers on the web never actually
+call `preventDefault()`, so browsers often block scrolling unneccesarily. For instance, in Chrome for Android 80% of the touch events that block scrolling never actually prevent it. 10% of these events add more than 100ms of delay to the start of scrolling, and a catastrophic delay of at least 500ms occurs in 1% of scrolls.
 
 Many developers are surprised to learn that [simply adding an empty touch handler to their document](http://rbyers.github.io/janky-touch-scroll.html) can have a
 significant negative impact on scroll performance.  Developers quite reasonably expect that the act of observing an event [should not have any side-effects](https://dom.spec.whatwg.org/#observing-event-listeners).
 
 The fundamental problem here is not limited to touch events. [`wheel` events](https://w3c.github.io/uievents/#events-wheelevents)
-suffer from an identical issue. However [pointer event handlers](https://w3c.github.io/pointerevents/) are
-designed to never block scrolling, and so do not suffer from this issue.  Essentially the passive event
+suffer from an identical issue. In contrast, [pointer event handlers](https://w3c.github.io/pointerevents/) are
+designed to never block scrolling unless a developer has explicitly indicated (through the use of `touch-action`) that a specific default browser action should be suppressed, and so do not suffer from this issue.  Essentially the passive event
 listener proposal brings the performance properties of pointer events to touch and wheel events.
 
 This proposal provides a way for authors to indicate at handler registration time whether the handler may call `preventDefault()` on the event (i.e. whether it needs an event that is [cancelable](https://dom.spec.whatwg.org/#dom-event-cancelable)). When no touch handlers at a particular point require a cancelable event, a user agent is free to start scrolling immediately without waiting for JavaScript.  That is, passive listeners are free from surprising performance side-effects.
