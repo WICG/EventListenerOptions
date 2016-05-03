@@ -18,7 +18,7 @@ suffer from an identical issue. In contrast, [pointer event handlers](https://w3
 designed to never block scrolling unless a developer has explicitly indicated (through the use of `touch-action`) that a specific default browser action should be suppressed, and so do not suffer from this issue.  Essentially the passive event
 listener proposal brings the performance properties of pointer events to touch and wheel events.
 
-This proposal provides a way for authors to indicate at handler registration time whether the handler may call `preventDefault()` on the event (i.e. whether it needs an event that is [cancelable](https://dom.spec.whatwg.org/#dom-event-cancelable)). When no touch handlers at a particular point require a cancelable event, a user agent is free to start scrolling immediately without waiting for JavaScript.  That is, passive listeners are free from surprising performance side-effects.
+This proposal provides a way for authors to indicate at handler registration time whether the handler may call `preventDefault()` on the event (i.e. whether it needs an event that is [cancelable](https://dom.spec.whatwg.org/#dom-event-cancelable)). When no touch or wheel handlers at a particular point require a cancelable event, a user agent is free to start scrolling immediately without waiting for JavaScript.  That is, passive listeners are free from surprising performance side-effects.
 
 ## EventListenerOptions
 
@@ -76,14 +76,14 @@ Now rather than the browser having to block scrolling whenever there is any touc
 
 So **by marking a touch or wheel listener as `passive`, the developer is promising the handler won't call `preventDefault` to disable scrolling.**  This frees the browser up to respond to scrolling immediately without waiting for JavaScript, thus ensuring a reliably smooth scrolling experience for the user.
 
-## Removing the need to cancel touch events
+## Removing the need to cancel events
 
-There are scenarios where an author may intentionally want to disable scrolling by cancelling touch events. These include:
+There are scenarios where an author may intentionally want to disable scrolling by cancelling touch or wheel events. These include:
  * Panning a map
  * Full-page/full-screen games
  In these cases, the current browser behavior (which prevents scrolling optimization) is perfectly adequate, since scrolling itself is being prevented.
 
- However, in a number of common scenarios touch events don't need to block scrolling, eg:
+ However, in a number of common scenarios events don't need to block scrolling, eg:
  * User activity monitoring which just wants to know when the user was last active
  * `touchstart` handlers that hide some active UI (like tooltips)
  * `touchstart` and `touchend` handlers that style UI elements (without suppressing the `click` event).
