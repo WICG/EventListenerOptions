@@ -7,7 +7,7 @@ Passive event listeners are a new feature [in the DOM spec](https://dom.spec.wha
 Smooth scrolling performance is essential to a good experience on the web, especially on touch-based devices.
 All modern browsers have a threaded scrolling feature to permit scrolling to run smoothly even when expensive
 JavaScript is running, but this optimization is partially defeated by the need to wait for the results of
-any `touchstart` and `touchmove` handlers, which may prevent the scroll entirely by calling [`preventDefault()`](http://www.w3.org/TR/touch-events/#the-touchstart-event) on the event. However, analysis indicates that the majority of touch event handlers on the web never actually
+any `touchstart` and `touchmove` handlers, which may prevent the scroll entirely by calling [`preventDefault()`](http://www.w3.org/TR/touch-events/#the-touchstart-event) on the event. While there are particular scenarios where an author may indeed want to prevent scrolling, analysis indicates that the majority of touch event handlers on the web never actually
 call `preventDefault()`, so browsers often block scrolling unneccesarily. For instance, in Chrome for Android 80% of the touch events that block scrolling never actually prevent it. 10% of these events add more than 100ms of delay to the start of scrolling, and a catastrophic delay of at least 500ms occurs in 1% of scrolls.
 
 Many developers are surprised to learn that [simply adding an empty touch handler to their document](http://rbyers.github.io/janky-touch-scroll.html) can have a
@@ -78,16 +78,18 @@ So **by marking a touch or wheel listener as `passive`, the developer is promisi
 
 ## Removing the need to cancel touch events
 
-In general touch listeners should always be `passive` unless you know they need to block scrolling.  In a number of common scenarios the `passive` option can be added (with appropriate feature detection) without any other changes, eg:
+There are scenarios where an author may intentionally want to disable scrolling by cancelling touch events. These include:
+ * Panning a map
+ * Full-page/full-screen games
+ In these cases, the current browser behavior (which prevents scrolling optimization) is perfectly adequate, since scrolling itself is being prevented.
+
+ However, in a number of common scenarios touch events don't need to block scrolling, eg:
  * User activity monitoring which just wants to know when the user was last active
  * `touchstart` handlers that hide some active UI (like tooltips)
  * `touchstart` and `touchend` handlers that style UI elements (without suppressing the `click` event).
+ For these scenarios, the `passive` option can be added (with appropriate feature detection) without any other code changes, resulting in a significantly smoother scrolling experience.
 
-And of course there are scenarios where there is no need to use a `passive` listener because the listener intentionally disables scrolling in all cases, eg:
- * Panning a map
- * Full-page games
-
-But there are a few more complicated scenarios where the handler really wants to suppress scrolling some cases but not in others.  eg:
+There are a few more complicated scenarios where the handler only wants to suppress scrolling under certain conditions, eg:
  * Swiping horizontally to rotate a carousel, dismiss an item or reveal a drawer, while still permitting vertical scrolling.
    * In this case, use [touch-action](https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action) to declaratively disable scrolling along one axis without having to call `preventDefault()`.
    * To continue to work correctly in all browsers, calls to `preventDefault` should be conditional on the lack of support for the particular `touch-action` rule being used (note that Safari 9 supports `touch-action: manipulation` but not the other values).
