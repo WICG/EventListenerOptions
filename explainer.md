@@ -92,7 +92,7 @@ There are scenarios where an author may intentionally want to disable scrolling 
 There are a few more complicated scenarios where the handler only wants to suppress scrolling under certain conditions, eg:
  * Swiping horizontally to rotate a carousel, dismiss an item or reveal a drawer, while still permitting vertical scrolling.
    * In this case, use [touch-action](https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action) to declaratively disable scrolling along one axis without having to call `preventDefault()`.
-   * To continue to work correctly in all browsers, calls to `preventDefault` should be conditional on the lack of support for the particular `touch-action` rule being used (note that Safari 9 supports `touch-action: manipulation` but not the other values).
+   * To continue to work correctly in all browsers, calls to `preventDefault` should be conditional on the lack of support for the particular `touch-action` rule being used (note that Safari 9 currently only supports `touch-action: manipulation`).
  * Event delegation patterns where the code that adds the listener won't know if the consumer will cancel the event.
    * One option here is to do delegation separately for passive and non-passive listeners (as if they were different event types entirely).
    * It's also possible to leverage `touch-action` as above (treating Touch Events as you would [Pointer Events](https://w3c.github.io/pointerevents/).
