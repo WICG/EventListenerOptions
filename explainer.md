@@ -15,8 +15,7 @@ significant negative impact on scroll performance.  Developers quite reasonably 
 
 The fundamental problem here is not limited to touch events. [`wheel` events](https://w3c.github.io/uievents/#events-wheelevents)
 suffer from an identical issue. In contrast, [pointer event handlers](https://w3c.github.io/pointerevents/) are
-designed to never block scrolling unless a developer has explicitly indicated (through the use of `touch-action`) that a specific default browser action should be suppressed, and so do not suffer from this issue.  Essentially the passive event
-listener proposal brings the performance properties of pointer events to touch and wheel events.
+designed to never delay scrolling (though developers can declaratively suppress scrolling altogether with the `touch-action` CSS property), so do not suffer from this issue. Essentially the passive event listener proposal brings the performance properties of pointer events to touch and wheel events.
 
 This proposal provides a way for authors to indicate at handler registration time whether the handler may call `preventDefault()` on the event (i.e. whether it needs an event that is [cancelable](https://dom.spec.whatwg.org/#dom-event-cancelable)). When no touch or wheel handlers at a particular point require a cancelable event, a user agent is free to start scrolling immediately without waiting for JavaScript.  That is, passive listeners are free from surprising performance side-effects.
 
@@ -79,7 +78,7 @@ So **by marking a touch or wheel listener as `passive`, the developer is promisi
 ## Removing the need to cancel events
 
 There are scenarios where an author may intentionally want to disable scrolling by cancelling touch or wheel events. These include:
- * Panning a map
+ * Panning and zooming a map
  * Full-page/full-screen games
  In these cases, the current browser behavior (which prevents scrolling optimization) is perfectly adequate, since scrolling itself is being prevented.
 
@@ -93,6 +92,7 @@ There are a few more complicated scenarios where the handler only wants to suppr
  * Swiping horizontally to rotate a carousel, dismiss an item or reveal a drawer, while still permitting vertical scrolling.
    * In this case, use [touch-action](https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action) to declaratively disable scrolling along one axis without having to call `preventDefault()`.
    * To continue to work correctly in all browsers, calls to `preventDefault` should be conditional on the lack of support for the particular `touch-action` rule being used (note that Safari 9 currently only supports `touch-action: manipulation`).
+ * A UI element (like YouTube's volume slider) which slides on horizontal wheel events without changing the scrolling behavior on vertical wheel events. Since there is no equivalent of "touch-action" for wheel events, this case can only be implemented with non-passive wheel listeners.
  * Event delegation patterns where the code that adds the listener won't know if the consumer will cancel the event.
    * One option here is to do delegation separately for passive and non-passive listeners (as if they were different event types entirely).
    * It's also possible to leverage `touch-action` as above (treating Touch Events as you would [Pointer Events](https://w3c.github.io/pointerevents/).
