@@ -21,7 +21,7 @@ This proposal provides a way for authors to indicate at handler registration tim
 
 ## EventListenerOptions
 
-First, we need a mechanism for attaching additional information to an event listener.  Today the `capture` argument to `addEventListener` is the closest example of something like this, but it's usage is pretty opaque:
+First, we need a mechanism for attaching additional information to an event listener.  Today the `capture` argument to `addEventListener` is the closest example of something like this, but its usage is pretty opaque:
 
 ```javascript
   document.addEventListener('touchstart', handler, true);
@@ -33,11 +33,11 @@ First, we need a mechanism for attaching additional information to an event list
   document.addEventListener('touchstart', handler, {capture: true});
 ```
 
-This much is simply new (extensible) syntax for existing behavior - specifying [whether you want the listener invoked during the capture phase or bubbling phase](http://javascript.info/tutorial/bubbling-and-capturing#capturing).
+This is simply the new (extensible) syntax for existing behavior - specifying [whether you want the listener invoked during the capture phase or bubbling phase](http://javascript.info/tutorial/bubbling-and-capturing#capturing).
 
 ## Feature Detection
 
-Because older browsers will interpret any object in the 3rd argument as `useCapture=true` it's important for developers to use feature detection or [a polyfill](https://github.com/WICG/EventListenerOptions/blob/gh-pages/EventListenerOptions.polyfill.js) when using this API.  Feature detection for specific options can be done as follows:
+Because older browsers will interpret any object in the 3rd argument as a `true` value for the `capture` argument, it's important for developers to use feature detection or [a polyfill](https://github.com/WICG/EventListenerOptions/blob/gh-pages/EventListenerOptions.polyfill.js) when using this API, to avoid unforeseen results.  Feature detection for specific options can be done as follows:
 
 ```javascript
 var supportsCaptureOption = false;
@@ -59,9 +59,9 @@ function addEventListenerWithOptions(target, type, handler, options) {
 }
 ```
 
-## SOLUTION: the 'passive' option
+## Solution: the 'passive' option
 
-So now we have an extensible syntax for specifying options at event handler registration time.  We can now add a new `passive` option which declares up-front that the listener will never call `preventDefault()` on the event.  If it does, the user agent will just ignore the request (ideally generating at least a console warning), as it already does for events with `Event.cancelable=false`.  A developer can see this is the case by querying `Event.defaultPrevented` before and after calling `preventDefault()`.  Eg:
+Now that we have an extensible syntax for specifying options at event handler registration time, we can add a new `passive` option which declares up-front that the listener will never call `preventDefault()` on the event.  If it does, the user agent will just ignore the request (ideally generating at least a console warning), as it already does for events with `Event.cancelable=false`.  A developer can verify this by querying `Event.defaultPrevented` before and after calling `preventDefault()`.  Eg:
 
 ```javascript
   addEventListenerWithOptions(document, "touchstart", function(e) {
@@ -71,9 +71,9 @@ So now we have an extensible syntax for specifying options at event handler regi
   }, {passive: true});
 ```
 
-Now rather than the browser having to block scrolling whenever there is any touch or wheel listener, it can do so only when there are *non-passive* listeners (see [TouchEvents spec](http://w3c.github.io/touch-events/#cancelability)).  `passive` listeners are free of performance side-effects.
+Now rather than having to block scrolling whenever there are any touch or wheel listener, the browser only needs to do this when there are *non-passive* listeners (see [TouchEvents spec](http://w3c.github.io/touch-events/#cancelability)).  `passive` listeners are free of performance side-effects.
 
-So **by marking a touch or wheel listener as `passive`, the developer is promising the handler won't call `preventDefault` to disable scrolling.**  This frees the browser up to respond to scrolling immediately without waiting for JavaScript, thus ensuring a reliably smooth scrolling experience for the user.
+**By marking a touch or wheel listener as `passive`, the developer is promising the handler won't call `preventDefault` to disable scrolling.**  This frees the browser up to respond to scrolling immediately without waiting for JavaScript, thus ensuring a reliably smooth scrolling experience for the user.
 
 ## Removing the need to cancel events
 
@@ -104,13 +104,13 @@ There are a few more complicated scenarios where the handler only wants to suppr
 
 ## Debugging and measuring the benefit
 
-See [this video](https://www.youtube.com/watch?v=6-D_3yx_KVI) for tips on how to use Chrome dev-tools features to identify listeners that are blocking scrolling.  You can [monitor event timestamps](http://rbyers.net/scroll-latency.html) to measure scroll jank in the wild, and use [chromium's tracing system](https://www.chromium.org/developers/how-tos/trace-event-profiling-tool) to look at the InputLatency records for scrolling when debugging.
+See [this video](https://www.youtube.com/watch?v=6-D_3yx_KVI) for tips on how to use Chrome's Developer Tools to identify listeners that are blocking scrolling.  You can [monitor event timestamps](http://rbyers.net/scroll-latency.html) to measure scroll jank in the wild, and use [Chromium's tracing system](https://www.chromium.org/developers/how-tos/trace-event-profiling-tool) to look at the InputLatency records for scrolling when debugging.
 
 The Chrome team is working on a proposal for both a [PerformanceTimeline API](https://code.google.com/p/chromium/issues/detail?id=543598) and more [DevTools features](https://code.google.com/p/chromium/issues/detail?id=520659) to help web developers get better visibility into this problem today.  
 
 ## Reducing and breaking up long-running JS is still critical
 
-When a page exhibits substantial scroll jank, it's always an indication of an underlying peformance issue somewhere.  Passive event listeners do nothing to address that underlying issue, we still strongly encourage developers to ensure their application meets the [RAIL guidelines](https://developers.google.com/web/tools/chrome-devtools/profile/evaluate-performance/rail?hl=en) on even low-end phones.  If your site has logic that runs for >100ms at a time, it will still feel sluggish in response to taps / clicks.  Passive event listeners just allow developers to decouple the issue of having JS responsiveness reflected in scroll performance from the desire to monitor input events.  In particular, developers of third-party analytics libraries can now have some confidence that their use of light-weight event listeners will not fundamentally change the observed performance characteristics of any page using their code.
+When a page exhibits substantial scroll jank, it's always an indication of an underlying peformance issue somewhere.  Passive event listeners do nothing to address these underlying issues, so we still strongly encourage developers to ensure that their application meets the [RAIL guidelines](https://developers.google.com/web/tools/chrome-devtools/profile/evaluate-performance/rail?hl=en) even on low-end devices.  If your site has logic that runs for >100ms at a time, it will still feel sluggish in response to taps / clicks.  Passive event listeners just allow developers to decouple the issue of having JS responsiveness reflected in scroll performance from the desire to monitor input events.  In particular, developers of third-party analytics libraries can now have some confidence that their use of light-weight event listeners will not fundamentally change the observed performance characteristics of any page using their code.
 
 ## Further reading and discussion
 
