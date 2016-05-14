@@ -21,7 +21,7 @@ This proposal provides a way for authors to indicate at handler registration tim
 
 ## EventListenerOptions
 
-First, we need a mechanism for attaching additional information to an event listener.  Today the `capture` argument to `addEventListener` is the closest example of something like this, but its usage is pretty opqaue:
+First, we need a mechanism for attaching additional information to an event listener.  Today the `capture` argument to `addEventListener` is the closest example of something like this, but its usage is pretty opaque:
 
 ```javascript
   document.addEventListener('touchstart', handler, true);
