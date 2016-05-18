@@ -24,6 +24,7 @@ An [extension](https://dom.spec.whatwg.org/#dictdef-eventlisteneroptions) to the
   * [Tips for debugging scroll jank screencast](https://www.youtube.com/watch?v=6-D_3yx_KVI)
 
 #### Issues with and adoption by key libraries:
+  * [Feature detect in Modernizr](https://github.com/Modernizr/Modernizr/blob/master/feature-detects/dom/passiveeventlisteners.js) ([issue](https://github.com/Modernizr/Modernizr/issues/1894) 
   * [Parse.ly](https://github.com/Parsely/time-engaged/issues/3)
   * [jQuery](https://github.com/jquery/jquery/issues/2871)
   * [Ember.js](https://github.com/emberjs/ember.js/issues/12783)
