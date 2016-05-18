@@ -59,6 +59,12 @@ function addEventListenerWithOptions(target, type, handler, options) {
 }
 ```
 
+To make this simpler you can use the feature detect from [Modernizr](https://modernizr.com/), eg:
+```javascript
+  target.addEventListener(type, handler, 
+    Modernizr.passiveeventlisteners ? {passive:true} : false);
+```
+
 ## Solution: the 'passive' option
 
 Now that we have an extensible syntax for specifying options at event handler registration time, we can add a new `passive` option which declares up-front that the listener will never call `preventDefault()` on the event.  If it does, the user agent will just ignore the request (ideally generating at least a console warning), as it already does for events with `Event.cancelable=false`.  A developer can verify this by querying `Event.defaultPrevented` before and after calling `preventDefault()`.  Eg:
