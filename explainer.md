@@ -110,6 +110,8 @@ There are a few more complicated scenarios where the handler only wants to suppr
 
 ## Debugging and measuring the benefit
 
+You can get a quick idea of the benefit possible (and potential breakage) by forcing touch/wheel listeners to be treated as passive via  chrome://flags/#passive-listener-default (new in Chrome 52).  This makes it easy to do your own side-by-side comparisons like [this popular video](https://twitter.com/RickByers/status/719736672523407360).
+
 See [this video](https://www.youtube.com/watch?v=6-D_3yx_KVI) for tips on how to use Chrome's Developer Tools to identify listeners that are blocking scrolling.  You can [monitor event timestamps](http://rbyers.net/scroll-latency.html) to measure scroll jank in the wild, and use [Chromium's tracing system](https://www.chromium.org/developers/how-tos/trace-event-profiling-tool) to look at the InputLatency records for scrolling when debugging.
 
 The Chrome team is working on a proposal for both a [PerformanceTimeline API](https://code.google.com/p/chromium/issues/detail?id=543598) and more [DevTools features](https://code.google.com/p/chromium/issues/detail?id=520659) to help web developers get better visibility into this problem today.  
