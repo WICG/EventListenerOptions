@@ -44,7 +44,7 @@ Now that we have an extensible syntax for specifying options at event handler re
     console.log(e.defaultPrevented);  // will be false
     e.preventDefault();   // does nothing since the listener is passive
     console.log(e.defaultPrevented);  // still false
-  }, supportsPassive ? {passive: true} : false);
+  }, Modernizr.passiveeventlisteners ? {passive: true} : false);
 ```
 
 Now rather than having to block scrolling whenever there are any touch or wheel listener, the browser only needs to do this when there are *non-passive* listeners (see [TouchEvents spec](http://w3c.github.io/touch-events/#cancelability)).  `passive` listeners are free of performance side-effects.
