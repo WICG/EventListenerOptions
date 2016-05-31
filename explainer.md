@@ -101,7 +101,7 @@ For these scenarios, the `passive` option can be added (with appropriate feature
 There are a few more complicated scenarios where the handler only wants to suppress scrolling under certain conditions, such as:
 
  * Swiping horizontally to rotate a carousel, dismiss an item or reveal a drawer, while still permitting vertical scrolling.
-   * In this case, use [touch-action](https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action) to declaratively disable scrolling along one axis without having to call `preventDefault()`.
+   * In this case, use [touch-action: pan-y](https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action) to declaratively disable scrolling that starts along the horizontal axis without having to call `preventDefault()`.
    * To continue to work correctly in all browsers, calls to `preventDefault` should be conditional on the lack of support for the particular `touch-action` rule being used (note that Safari 9 currently only supports `touch-action: manipulation`).
  * A UI element (like YouTube's volume slider) which slides on horizontal wheel events without changing the scrolling behavior on vertical wheel events. Since there is no equivalent of "touch-action" for wheel events, this case can only be implemented with non-passive wheel listeners.
  * Event delegation patterns where the code that adds the listener won't know if the consumer will cancel the event.
