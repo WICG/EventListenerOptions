@@ -83,12 +83,12 @@ To make this simpler you can use the feature detect from [Modernizr](https://mod
 
 ## Removing the need to cancel events
 
-There are scenarios where an author may intentionally want to disable scrolling by cancelling touch or wheel events. These include:
+There are scenarios where an author may intentionally want to consistently disable scrolling by cancelling all touch or wheel events. These include:
 
  * Panning and zooming a map
  * Full-page/full-screen games
  
-In these cases, the current browser behavior (which prevents scrolling optimization) is perfectly adequate, since scrolling itself is being prevented.
+In these cases, the current behavior (which prevents scrolling optimization) is perfectly adequate, since scrolling itself is being prevented consistently.  There is no need to use passive listeners in these cases, though it's often still a good idea to apply a `touch-action: none` CSS rule to make your intention explicit (eg. supporting browsers with Pointer Events but not Touch Events).
 
  However, in a number of common scenarios events don't need to block scrolling - for instance:
  
