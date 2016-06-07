@@ -16,6 +16,7 @@ An [extension](https://dom.spec.whatwg.org/#dictdef-eventlisteneroptions) to the
  * [Polyfill](EventListenerOptions.polyfill.js)
 
 #### Additional background on the problem:
+ * [Summary from Google I/O 2016 Mobile Web talk](https://youtu.be/0SSI8liELJU?t=6m20s)
  * [Ilya Grigorik's talk at Chrome Dev Summit](https://www.youtube.com/watch?v=NrEjkflqPxQ&feature=youtu.be&t=557) [[slides](https://docs.google.com/presentation/d/1WdMyLpuI93TR_w0fvKqFlUGPcLk3A4UJ2sBuUkeFcwU/present?slide=id.g7299ef155_0_7)]
  * [Discussion on twitter](https://twitter.com/RickByers/status/719736672523407360) with [demo video](https://www.youtube.com/watch?v=NPM6172J22g)
  * [Demo page with latency measurement](https://rbyers.github.io/scroll-latency.html)
