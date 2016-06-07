@@ -12,7 +12,7 @@ An [extension](https://dom.spec.whatwg.org/#dictdef-eventlisteneroptions) to the
    * [Chromium bug](https://bugs.chromium.org/p/chromium/issues/detail?id=599609) tracking the [next step](https://github.com/WICG/interventions/issues/18) of automatically opting some listeners into passive behavior.
  * WebKit: EventListenerOptions support [landed](https://bugs.webkit.org/show_bug.cgi?id=149466)
    * Performance optimization of passive touch/wheel listeners not yet implemented. 
- * Firefox: [Landed](https://bugzilla.mozilla.org/show_bug.cgi?id=1266066)
+ * Firefox: [Landed](https://bugzilla.mozilla.org/show_bug.cgi?id=1266066) - planned to [ship in Firefox 49](https://platform-status.mozilla.org/#passive-event-listeners)
  * [Polyfill](EventListenerOptions.polyfill.js)
 
 #### Additional background on the problem:
