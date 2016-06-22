@@ -77,7 +77,7 @@ elem.addEventListener('touchstart', fn, supportsPassive ? { passive: true } : fa
 
 To make this simpler you can use the feature detect from [Modernizr](https://modernizr.com/), eg:
 ```javascript
-  target.addEventListener(type, handler, 
+  elem.addEventListener('touchstart', fn, 
     Modernizr.passiveeventlisteners ? {passive:true} : false);
 ```
 
