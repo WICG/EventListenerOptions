@@ -19,7 +19,7 @@
     var super_prevent_default = Event.prototype.preventDefault;
 
     function parseOptions(type, listener, options, action) {
-      var needsWrapping = true;
+      var needsWrapping = false;
       var useCapture = false;
       var passive = false;
       var fieldId;
