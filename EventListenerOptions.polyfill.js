@@ -49,6 +49,7 @@
     }
 
     EventTarget.prototype.addEventListener = function(type, listener, options) {
+      var super_this = this;
       parseOptions(type, listener, options,
         function(needsWrapping, fieldId, useCapture, passive) {
           if (needsWrapping) {
@@ -75,14 +76,15 @@
               }
             };
             this.__event_listeners_options[type][listener][fieldId] = wrapped;
-            super_add_event_listener(type, wrapped, useCapture);
+            super_add_event_listener.call(super_this, type, wrapped, useCapture);
           } else {
-            super_add_event_listener(type, listener, useCapture);
+            super_add_event_listener.call(super_this, type, listener, useCapture);
           }
         });
     }
 
     EventTarget.prototype.removeEventListener = function(type, listener, options) {
+      var super_this = this;
       parseOptions(type, listener, options,
         function(needsWrapping, fieldId, useCapture, passive) {
           if (needsWrapping &&
@@ -90,12 +92,12 @@
               this.__event_listeners_options[type] &&
               this.__event_listeners_options[type][listener] &&
               this.__event_listeners_options[type][listener][fieldId]) {
-            super_remove_event_listener(type, this.__event_listeners_options[type][listener][fieldId], false);
+            super_remove_event_listener.call(super_this, type, this.__event_listeners_options[type][listener][fieldId], false);
             delete this.__event_listeners_options[type][listener][fieldId];
             if (this.__event_listeners_options[type][listener].length == 0)
               delete this.__event_listeners_options[type][listener];
           } else {
-            super_remove_event_listener(type, listener, useCapture);
+            super_remove_event_listener.call(super_this, type, listener, useCapture);
           }
         });
     }
