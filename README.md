@@ -13,7 +13,7 @@ An [extension](https://dom.spec.whatwg.org/#dictdef-eventlisteneroptions) to the
  * WebKit: EventListenerOptions support [landed](https://bugs.webkit.org/show_bug.cgi?id=149466)
    * Performance optimization of passive touch/wheel listeners not yet implemented. 
  * Firefox: [Landed](https://bugzilla.mozilla.org/show_bug.cgi?id=1266066) - planned to [ship in Firefox 49](https://platform-status.mozilla.org/#passive-event-listeners)
- * [Polyfill](EventListenerOptions.polyfill.js)
+ * [DOM4 Polyfill](https://github.com/WebReflection/dom4), or sample [polyfill here](EventListenerOptions.polyfill.js)
 
 #### Additional background on the problem:
  * [Summary from Google I/O 2016 Mobile Web talk](https://youtu.be/0SSI8liELJU?t=6m20s)
