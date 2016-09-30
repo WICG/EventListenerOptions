@@ -57,7 +57,7 @@ Now rather than having to block scrolling whenever there are any touch or wheel 
 
 ## Feature Detection
 
-Because older browsers will interpret any object in the 3rd argument as a `true` value for the `capture` argument, it's important for developers to use feature detection or [a polyfill](https://github.com/WICG/EventListenerOptions/blob/gh-pages/EventListenerOptions.polyfill.js) when using this API, to avoid unforeseen results.  Feature detection for specific options can be done as follows:
+Because older browsers will interpret any object in the 3rd argument as a `true` value for the `capture` argument, it's important for developers to use feature detection or [a polyfill](https://github.com/WebReflection/dom4) when using this API, to avoid unforeseen results.  Feature detection for specific options can be done as follows:
 
 ```javascript
 // Test via a getter in the options object to see if the passive property is accessed
