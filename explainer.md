@@ -75,11 +75,14 @@ try {
 elem.addEventListener('touchstart', fn, supportsPassive ? { passive: true } : false); 
 ```
 
-To make this simpler you can use the feature detect from [Modernizr](https://modernizr.com/), eg:
+To make this simpler you can use the feature detect from [Detect It](https://github.com/rafrex/detect-it), eg:
 ```javascript
-  elem.addEventListener('touchstart', fn, 
-    Modernizr.passiveeventlisteners ? {passive:true} : false);
+  elem.addEventListener('touchstart', fn,
+    detectIt.passiveEvents ? {passive:true} : false);
 ```
+
+[Modernizr](https://modernizr.com/) is also working on a detect [here](https://github.com/Modernizr/Modernizr/issues/1894), but it hasn't been released yet.
+
 
 ## Removing the need to cancel events
 
