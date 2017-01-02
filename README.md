@@ -8,10 +8,11 @@ An [extension](https://dom.spec.whatwg.org/#dictdef-eventlisteneroptions) to the
  * [Interventions issue 18](https://github.com/WICG/interventions/issues/18) tracks the plan to "[intervene](bit.ly/user-agent-intervention)" and force touch listeners to be passive in scenarios where the compat risk is low but the perf benefit large.
  
 #### Status of implementations:
+ * See [CanIUse entry for passive event listeners](http://caniuse.com/#feat=passive-event-listener)
  * Chromium: [shipping](https://www.chromestatus.com/features/5745543795965952) in Chrome 51 ([launch bug](https://bugs.chromium.org/p/chromium/issues/detail?id=489802))
    * [Chromium bug](https://bugs.chromium.org/p/chromium/issues/detail?id=599609) tracking the [next step](https://github.com/WICG/interventions/issues/18) of automatically opting some listeners into passive behavior.
- * WebKit: EventListenerOptions support [landed](https://bugs.webkit.org/show_bug.cgi?id=149466)
-   * Performance optimization of passive touch/wheel listeners not yet implemented. 
+ * WebKit: [EventListenerOptions support](https://bugs.webkit.org/show_bug.cgi?id=149466) and [performance optimization for touch listeners](https://bugs.webkit.org/show_bug.cgi?id=158601) landed.
+   * [Performance optimization of wheel listeners](https://bugs.webkit.org/show_bug.cgi?id=158439) not yet implemented. 
  * Firefox: [Landed](https://bugzilla.mozilla.org/show_bug.cgi?id=1266066) - planned to [ship in Firefox 49](https://platform-status.mozilla.org/#passive-event-listeners)
  * [DOM4 Polyfill](https://github.com/WebReflection/dom4), or sample [polyfill here](EventListenerOptions.polyfill.js)
 
