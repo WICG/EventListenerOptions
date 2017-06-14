@@ -1,6 +1,6 @@
 # Passive event listeners
 
-Passive event listeners are a new feature [in the DOM spec](https://dom.spec.whatwg.org/#dom-eventlisteneroptions-passive) that enable developers to opt-in to better scroll performance by eliminating the need for scrolling to block on touch and wheel event listeners.  Developers can annotate touch and wheel listeners with `{passive: true}` to indicate that they will never invoke `preventDefault`.  This feature [shipped in Chrome 51](https://www.chromestatus.com/features/5745543795965952), [Firefox 49](https://bugzilla.mozilla.org/show_bug.cgi?id=1266066) and [landed in WebKit](https://bugs.webkit.org/show_bug.cgi?id=158601). Check out the video below for a side-by-side of passive event listeners in action:
+Passive event listeners are a new feature [in the DOM spec](https://dom.spec.whatwg.org/#dom-addeventlisteneroptions-passive) that enable developers to opt-in to better scroll performance by eliminating the need for scrolling to block on touch and wheel event listeners.  Developers can annotate touch and wheel listeners with `{passive: true}` to indicate that they will never invoke `preventDefault`.  This feature [shipped in Chrome 51](https://www.chromestatus.com/features/5745543795965952), [Firefox 49](https://bugzilla.mozilla.org/show_bug.cgi?id=1266066) and [landed in WebKit](https://bugs.webkit.org/show_bug.cgi?id=158601). Check out the video below for a side-by-side of passive event listeners in action:
 
 [demo video](https://www.youtube.com/watch?v=NPM6172J22g)
 
