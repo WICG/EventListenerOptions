@@ -10,7 +10,7 @@ Smooth scrolling performance is essential to a good experience on the web, espec
 All modern browsers have a threaded scrolling feature to permit scrolling to run smoothly even when expensive
 JavaScript is running, but this optimization is partially defeated by the need to wait for the results of
 any `touchstart` and `touchmove` handlers, which may prevent the scroll entirely by calling [`preventDefault()`](http://www.w3.org/TR/touch-events/#the-touchstart-event) on the event. While there are particular scenarios where an author may indeed want to prevent scrolling, analysis indicates that the majority of touch event handlers on the web never actually
-call `preventDefault()`, so browsers often block scrolling unneccesarily. For instance, in Chrome for Android 80% of the touch events that block scrolling never actually prevent it. 10% of these events add more than 100ms of delay to the start of scrolling, and a catastrophic delay of at least 500ms occurs in 1% of scrolls.
+call `preventDefault()`, so browsers often block scrolling unnecessarily. For instance, in Chrome for Android 80% of the touch events that block scrolling never actually prevent it. 10% of these events add more than 100ms of delay to the start of scrolling, and a catastrophic delay of at least 500ms occurs in 1% of scrolls.
 
 Many developers are surprised to learn that [simply adding an empty touch handler to their document](http://rbyers.github.io/janky-touch-scroll.html) can have a
 significant negative impact on scroll performance.  Developers quite reasonably expect that the act of observing an event [should not have any side-effects](https://dom.spec.whatwg.org/#observing-event-listeners).
