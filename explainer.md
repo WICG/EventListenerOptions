@@ -66,7 +66,8 @@ try {
       supportsPassive = true;
     }
   });
-  window.addEventListener("test", null, opts);
+  window.addEventListener("testPassive", null, opts);
+  window.removeEventListener("testPassive", null, opts);
 } catch (e) {}
 
 // Use our detect's results. passive applied if supported, capture will be false either way.
