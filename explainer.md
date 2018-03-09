@@ -80,7 +80,7 @@ To make this simpler you can use the feature detect from [Detect It](https://git
     detectIt.passiveEvents ? {passive:true} : false);
 ```
 
-[Modernizr](https://modernizr.com/) is also working on a detect [here](https://github.com/Modernizr/Modernizr/issues/1894), but it hasn't been released yet.  There is an [open standards debate](https://github.com/heycam/webidl/issues/107) around providing a simpler API for dictionary member feature detection.
+[Modernizr](https://modernizr.com/) also has a detect [here](https://github.com/Modernizr/Modernizr/pull/1982).  There is an [open standards debate](https://github.com/heycam/webidl/issues/107) around providing a simpler API for dictionary member feature detection.
 
 
 ## Removing the need to cancel events
