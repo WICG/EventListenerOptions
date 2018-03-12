@@ -1,5 +1,10 @@
 # Passive Event Listeners (EventListenerOptions)
-An [extension](https://dom.spec.whatwg.org/#dictdef-eventlisteneroptions) to the DOM event pattern to allow listeners to disable support for `preventDefault`, primarily to enable scroll performance optimizations.  See the [**explainer document**](https://github.com/WICG/EventListenerOptions/blob/gh-pages/explainer.md) for an overview.  This work is now part of the [official WHATWG DOM spec](https://github.com/whatwg/dom), with resources / discussion preserved here.
+
+This work is now part of the [official WHATWG DOM spec](https://github.com/whatwg/dom). Please file any issues/pull requests there. This repository (and its resources / discussions) are only preserved here as an archive.
+
+---
+
+An [extension](https://dom.spec.whatwg.org/#dictdef-eventlisteneroptions) to the DOM event pattern to allow listeners to disable support for `preventDefault`, primarily to enable scroll performance optimizations.  See the [**explainer document**](https://github.com/WICG/EventListenerOptions/blob/gh-pages/explainer.md) for an overview.
 
 #### Spec changes
  * See the main [commit in the DOM specification](https://github.com/whatwg/dom/commit/253a21b8e78e37447c47983916a7cf39c4f6a3c5) or [pull request](https://github.com/whatwg/dom/pull/82) for full details.
